@@ -62,6 +62,7 @@ dt{color:var(--m);font-size:13px;margin-top:14px}dd{margin:2px 0 0;white-space:p
 @media(max-width:900px){.app{grid-template-columns:1fr}.sd{position:fixed;inset-block:0;inset-inline-start:0;width:270px;transform:translateX(100%);transition:transform .2s}.sd.on{transform:none}.mk.on{display:block}#mb{display:grid}.me span{display:none}.hd{padding:10px 14px}.ct{padding:16px 14px}}
 @media(max-width:1000px){.rw{grid-template-columns:minmax(0,1fr) auto auto;row-gap:8px}.rw .c,.rw .c2{grid-column:1/-1}.rw .go{display:none}.qg{grid-template-columns:1fr}}
 @media(max-width:560px){.g4{grid-template-columns:1fr}}
+table.ut tbody tr{cursor:default}table.ut tbody tr:hover{background:transparent}.tw select{height:34px;padding:2px 10px;font-size:13px}.tw select:disabled{opacity:.6}.chips{display:flex;gap:6px;flex-wrap:nowrap}
 </style>
 </head>
 <body>
@@ -96,7 +97,7 @@ dt{color:var(--m);font-size:13px;margin-top:14px}dd{margin:2px 0 0;white-space:p
 </div>
 <div class="dr" id="dr"><div class="pn" id="pn" role="dialog" aria-modal="true"></div></div>
 <script>
-const LOGIN="/login";
+const LOGIN="/"; /* صفحة الدخول في موقعك هي الصفحة الرئيسية */
 const $=s=>document.querySelector(s);
 const h=(t,c,...k)=>{const e=document.createElement(t);if(c)e.className=c;for(const x of k.flat())if(x!=null&&x!==false)e.append(x);return e};
 const fmt=(d,o)=>{try{return new Date(d).toLocaleString("ar-IQ-u-nu-latn",o||{dateStyle:"medium",timeStyle:"short"})}catch(_){return String(d)}};
@@ -299,27 +300,58 @@ function profile(){
 }
 const UERR={exists:"هذا البريد مسجّل مسبقاً",self:"لا يمكنك تنفيذ ذلك على حسابك",last_admin:"لا يمكن إزالة آخر مدير",invalid_input:"تحقق من البيانات (كلمة المرور 10 أحرف على الأقل)",forbidden:"غير مصرّح"};
 async function uapi(method,body){try{const r=await fetch("/api/users",{method,credentials:"same-origin",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});const j=await r.json().catch(()=>({}));return{ok:r.ok,j}}catch(_){return{ok:false,j:{}}}}
+/* [الاسم الكامل، الاسم المختصر، فريق العمل، مدير] — تتبع الصلاحيات دور الحساب في الخادم */
+const PERMS=[["عرض العملاء","عرض",true,true],["تحديث الحالة والملاحظات","تحديث",true,true],["تصدير CSV","تصدير",false,true],["إدارة المستخدمين","إدارة",false,true]];
+const UIC={u:'<svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.7-3.6 3.3-5.5 6.5-5.5s5.8 1.9 6.5 5.5M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.9.7 3.1 2.5 3.5 5.2"/></svg>',s:'<svg class="i" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>',t:'<svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c.8-4 4-6 8-6s7.2 2 8 6"/></svg>',x:'<svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg>'};
 async function usersPage(){
   const m=$("#m");m.textContent="";m.append(h("div","pt",h("h1",null,"المستخدمون")),stabs("users"));
-  const list=h("div","cd",h("p","mt","جارٍ التحميل…"));
+  let U=[],MEID=null;
+  const stats=h("div","g4 mb"),cnt=h("small",null,""),tw=h("div","tw",h("p","mt","جارٍ التحميل…")),mx=h("div","cd mb");
+  const q=h("input");q.type="search";q.placeholder="ابحث بالبريد الإلكتروني";q.setAttribute("aria-label","بحث في الحسابات");
+  const fs=h("select");fs.setAttribute("aria-label","تصفية الحسابات");[["","كل الحسابات"],["admin","المدراء"],["team","فريق العمل"],["off","المعطّلة"]].forEach(([v,t])=>{const o=h("option",null,t);o.value=v;fs.append(o)});
+  const list=h("div","cd mb");list.append(h("div","ch",h("div",null,h("h2",null,"جدول الحسابات"),cnt),h("div","bar",q,fs)),tw);
+  /* إضافة مستخدم */
   const em=h("input");em.type="email";em.placeholder="البريد الإلكتروني";em.autocomplete="off";
   const pw=h("input");pw.type="password";pw.placeholder="كلمة المرور (10 أحرف على الأقل)";pw.autocomplete="new-password";
   const rl=h("select");[["team","فريق العمل"],["admin","مدير"]].forEach(([k,t])=>{const o=h("option",null,t);o.value=k;rl.append(o)});
   const add=h("button","btn p","إضافة");add.type="button";
   add.onclick=async()=>{add.disabled=true;const r=await uapi("POST",{email:em.value,password:pw.value,role:rl.value});add.disabled=false;if(!r.ok){toast(UERR[r.j.error]||"تعذّر الإضافة");return}em.value=pw.value="";toast("تمت الإضافة");load()};
   const form=h("div","cd");form.append(h("div","ch",h("h2",null,"إضافة مستخدم")),h("div","bar",em,pw,rl,add));
-  m.append(list,h("div",null,""),form);form.style.marginTop="16px";
-  async function act(method,body,ok){const r=await uapi(method,body);if(!r.ok){toast(UERR[r.j.error]||"تعذّر التنفيذ");return}toast(ok);load()}
+  /* مصفوفة الصلاحيات (للاطلاع) */
+  const pt=h("table","ut"),ph=h("tr");["الصلاحية","فريق العمل","مدير"].forEach(x=>ph.append(h("th",null,x)));pt.style.minWidth="0";
+  const pb=h("tbody");PERMS.forEach(([n,,t,a])=>pb.append(h("tr",null,h("td",null,n),h("td",null,badge(t?"مسموح":"غير متاح",t?"ok":"er")),h("td",null,badge(a?"مسموح":"غير متاح",a?"ok":"er")))));
+  pt.append(h("thead",null,ph),pb);
+  mx.append(h("div","ch",h("div",null,h("h2",null,"مصفوفة الصلاحيات"),h("small",null,"الصلاحيات تتبع دور الحساب، وتغيّرها من عمود «الدور» في الجدول أعلاه"))),h("div","tw",pt));
+  m.append(stats,list,mx,form);
+  const K=(ic,l,v,bd)=>{const c=h("div","cd kp"),i=h("div","ic");i.innerHTML=ic;c.append(i,h("span","l",l),h("div","v",h("span",null,String(v)),bd||""));return c};
+  const sel=(opts,val,dis,fn,label)=>{const x=h("select");x.setAttribute("aria-label",label);opts.forEach(([k,t])=>{const o=h("option",null,t);o.value=k;x.append(o)});x.value=val;x.disabled=dis;if(dis)x.title="لا يمكنك تعديل صلاحيات حسابك";x.onchange=()=>fn(x.value,x);return x};
+  async function edit(u,patch,okMsg,ctl){if(ctl)ctl.disabled=true;const r=await uapi("PATCH",{id:u.id,...patch});toast(r.ok?okMsg:(UERR[r.j.error]||"تعذّر التنفيذ"));load()}
+  function render(){
+    const n=U.length,ad=U.filter(u=>u.role==="admin").length,off=U.filter(u=>!u.active).length;
+    stats.textContent="";stats.append(K(UIC.u,"إجمالي الحسابات",n,badge((n-off)+" فعّال","ok")),K(UIC.s,"المدراء",ad),K(UIC.t,"فريق العمل",n-ad),K(UIC.x,"حسابات معطّلة",off,off?badge("تحتاج مراجعة","er"):null));
+    const s=q.value.trim().toLowerCase(),f=fs.value,L=U.filter(u=>(!s||u.email.toLowerCase().includes(s))&&(!f||(f==="off"?!u.active:u.role===f)));
+    cnt.textContent=L.length===n?n+" حساب":L.length+" من "+n+" حساب";tw.textContent="";
+    if(!L.length){tw.append(h("div","em","لا توجد حسابات مطابقة"));return}
+    const t=h("table","ut"),hd=h("tr");["الحساب","الدور","الحالة","الصلاحيات","إجراءات"].forEach(x=>hd.append(h("th",null,x)));
+    const tb=h("tbody");
+    L.forEach(u=>{
+      const self=u.id===MEID;
+      const roleS=sel([["team","فريق العمل"],["admin","مدير"]],u.role,self,(v,c)=>edit(u,{role:v},"تم تغيير الدور",c),"دور "+u.email);
+      const actS=sel([["1","مفعّل"],["0","معطّل"]],u.active?"1":"0",self,(v,c)=>edit(u,{active:v==="1"},v==="1"?"تم التفعيل":"تم التعطيل",c),"حالة "+u.email);
+      const chips=h("div","chips");if(!u.active)chips.append(badge("الحساب معطّل","er"));else PERMS.forEach(([,sh,tm,ad2])=>{if(u.role==="admin"?ad2:tm)chips.append(badge(sh,u.role==="admin"?"br":"gr"))});
+      const B=(tx,fn)=>{const x=h("button","btn s",tx);x.type="button";x.onclick=fn;return x};
+      const acts=h("div","ac");acts.style.cssText="margin:0;flex-wrap:nowrap";
+      acts.append(B("كلمة مرور",()=>{const p=prompt("كلمة المرور الجديدة (10 أحرف على الأقل)");if(p)edit(u,{password:p},"تم تغيير كلمة المرور")}));
+      if(!self)acts.append(B("حذف",async()=>{if(!confirm("حذف "+u.email+" نهائياً؟"))return;const r=await uapi("DELETE",{id:u.id});toast(r.ok?"تم الحذف":(UERR[r.j.error]||"تعذّر التنفيذ"));load()}));
+      tb.append(h("tr",null,h("td",null,h("div","nm",h("div","av",ini(u.email)),h("div",null,u.email+(self?" (أنت)":""),h("small",null,(u.last_login_at?"آخر دخول "+ago(u.last_login_at):"لم يسجّل الدخول بعد")+" · أُنشئ "+fmt(u.created_at,{dateStyle:"medium"}))))),h("td",null,roleS),h("td",null,actS),h("td",null,chips),h("td",null,acts)));
+    });
+    t.append(h("thead",null,hd),tb);t.style.minWidth="800px";tw.append(t);
+  }
+  q.oninput=fs.onchange=render;
   async function load(){
     let j={};try{const r=await fetch("/api/users",{credentials:"same-origin"});j=await r.json()}catch(_){}
-    list.textContent="";list.append(h("div","ch",h("h2",null,"قائمة المستخدمين")));
-    if(!j.ok){list.append(h("p","mt","تعذّر تحميل المستخدمين"));return}
-    j.users.forEach(u=>{
-      const self=u.id===j.me,btns=h("div","ac"),B=(t,fn)=>{const x=h("button","btn s",t);x.type="button";x.onclick=fn;return x};
-      btns.style.margin="0";btns.append(B("كلمة مرور",()=>{const p=prompt("كلمة المرور الجديدة (10 أحرف على الأقل)");if(p)act("PATCH",{id:u.id,password:p},"تم تغيير كلمة المرور")}));
-      if(!self)btns.append(B(u.role==="admin"?"إلى فريق":"إلى مدير",()=>act("PATCH",{id:u.id,role:u.role==="admin"?"team":"admin"},"تم تغيير الدور")),B(u.active?"تعطيل":"تفعيل",()=>act("PATCH",{id:u.id,active:!u.active},u.active?"تم التعطيل":"تم التفعيل")),B("حذف",()=>{if(confirm("حذف "+u.email+" نهائياً؟"))act("DELETE",{id:u.id},"تم الحذف")}));
-      list.append(h("div","row",h("div","nm",h("div","av",ini(u.email)),h("div",null,u.email+(self?" (أنت)":""),h("small",null,(u.role==="admin"?"مدير":"فريق العمل")+" · "+(u.last_login_at?"آخر دخول "+ago(u.last_login_at):"لم يسجّل الدخول بعد")))),h("div","bar",badge(u.active?"فعّال":"معطّل",u.active?"ok":"er"),btns)));
-    });
+    if(!j.ok){tw.textContent="";tw.append(h("p","mt","تعذّر تحميل المستخدمين"));return}
+    U=j.users;MEID=j.me;render();
   }
   load();
 }
