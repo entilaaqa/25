@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Montserrat:wght@500;800&display=swap">
+<title>نموذج الجلسة الاستراتيجية — مشروع SaaS</title>
+<style>
+:root{--bg:#fafafa;--c:#fff;--s:#f5f5f5;--t:#0a0a0a;--m:#6b6b6b;--b:#e6e6e6;--br:#0a0a0a;--brt:#fff;--ok:#16a34a;--wn:#b45309;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a0a0a;--c:#141414;--s:#1d1d1d;--t:#f5f5f5;--m:#a3a3a3;--b:#2a2a2a;--br:#fff;--brt:#0a0a0a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0a0a0a;--c:#141414;--s:#1d1d1d;--t:#f5f5f5;--m:#a3a3a3;--b:#2a2a2a;--br:#fff;--brt:#0a0a0a;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font:15px/1.7 "Thmanyah","IBM Plex Sans Arabic",Tahoma,"Segoe UI",system-ui,sans-serif}
+.wm{font:800 20px Montserrat,Arial,sans-serif;direction:ltr;text-align:right;margin-bottom:10px;letter-spacing:-.2px}.wm em{font-style:normal;font-weight:500;opacity:.5}
+.w{max-width:1200px;margin:0 auto;padding:20px 16px 60px}h1{font-size:22px;margin:0 0 4px}p.sub{color:var(--m);margin:0 0 18px}
+.g{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;align-items:start}
+.cd{background:var(--c);border:1px solid var(--b);border-radius:16px;padding:18px;margin-bottom:14px}.cd h2{font-size:16px;margin:0}.cd .h{color:var(--m);font-size:13px;margin:2px 0 12px}
+.f{display:block;margin-bottom:12px}.f>span{display:block;color:var(--m);font-size:13px;margin-bottom:4px}
+input[type=text],input[type=number],select,textarea{width:100%;font:inherit;color:var(--t);background:var(--s);border:1px solid var(--b);border-radius:10px;padding:9px 11px}
+textarea{resize:vertical;min-height:62px}.r2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}.chips label{display:flex;align-items:center;gap:6px;border:1px solid var(--b);background:var(--s);border-radius:99px;padding:5px 12px;cursor:pointer;font-size:13.5px}.chips label:has(input:checked){background:var(--br);color:var(--brt);border-color:var(--br)}.chips input{display:none}.chips small{opacity:.7}
+.sm{position:sticky;top:12px}.big{font-size:34px;font-weight:700;margin:2px 0}.mt{color:var(--m);font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}td{padding:6px 0;border-bottom:1px solid var(--b)}td:last-child{text-align:left;font-weight:600;white-space:nowrap}
+.bd{display:inline-block;border-radius:99px;padding:1px 10px;font-size:12px;background:var(--s)}.ok{color:var(--ok)}.wn{color:var(--wn)}
+h3{font-size:14px;margin:14px 0 6px}.ck div{font-size:13.5px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}button{font:inherit;border:1px solid var(--b);background:var(--s);color:var(--t);border-radius:10px;padding:8px 14px;cursor:pointer}button.p{background:var(--br);color:var(--brt);border-color:var(--br)}
+@media(max-width:900px){.g{grid-template-columns:1fr}.sm{position:static;order:-1}.r2{grid-template-columns:1fr}}
+body.emb .wm,body.emb .w>h1,body.emb .w>p.sub,body.emb #rs{display:none}body.emb .w{padding:0}body.emb{background:transparent}
+@page{size:A4;margin:12mm}@media print{.bar,.int{display:none!important}.g{display:block}body{background:#fff;color:#000;font-size:12px}.sm{position:static}.cd{break-inside:avoid}}
+</style></head><body><div class="w">
+<div class="wm"><b>Entilaaqa</b><em>.com</em></div>
+<h1>نموذج الجلسة الاستراتيجية — مشروع SaaS</h1>
+<p class="sub">املأ النموذج مع العميل أثناء الجلسة؛ تُحسب التكلفة والعرض المقترح فورياً في اللوحة الجانبية. يُحفظ كل شيء تلقائياً في متصفحك.</p>
+<div class="g"><div class="fm" id="fm"></div><aside class="sm"><div class="cd" id="sum"></div></aside></div></div>
+<script>
+const $=s=>document.querySelector(s);
+const n0=v=>Math.round(v).toLocaleString("en-US"),r50=v=>Math.round(v/50)*50,usd=v=>"$"+n0(r50(v));
+/* [id, الاسم, ساعات, الطبقة: 1 أساسي · 2 إطلاق · 3 توسّع] */
+const MODS=[["auth","حسابات وصلاحيات مستخدمين",40,1],["dash","لوحة تحكم وإحصائيات",60,1],["bill","اشتراكات ودفع إلكتروني",50,2],["admin","لوحة إدارة للمالك",60,2],["notif","إشعارات (بريد / واتساب)",30,2],["rep","تقارير وتصدير",30,2],["file","رفع ملفات وتخزين",25,2],["lang","عربي / إنجليزي (RTL)",25,2],["mt","تعدد الشركات (Multi-tenant)",60,3],["ai","ميزات ذكاء اصطناعي",80,3],["rt","دردشة / تحديثات لحظية",60,3],["api","API عام للمطورين",40,3],["mob","تطبيق جوال",150,3]];
+const M=Object.fromEntries(MODS.map(x=>[x[0],x]));
+const GU={"0":"بلا ضمان","proto":"نموذج أولي تفاعلي يُعتمد قبل دفع الدفعة الثانية","time":"التسليم في الموعد أو خصم 10% عن كل أسبوع تأخير","fix":"30 يوماً بعد الإطلاق لتعديل أي خلل أو سلوك مخالف للمتفق عليه مجاناً"};
+const BN=[["train","جلسة تدريب لفريقه"],["docs","توثيق كامل للنظام"],["sup","30 يوم دعم أولوية"],["fast","إطلاق تجريبي خلال أسبوعين"]];
+const F=([k,l,t,o])=>`<label class="f"><span>${l}</span>${t==="a"?`<textarea data-k="${k}"></textarea>`:t==="s"?`<select data-k="${k}">${o.map(([v,x])=>`<option value="${v}">${x}</option>`).join("")}</select>`:`<input data-k="${k}" type="${t==="n"?"number":"text"}" ${t==="n"?'inputmode="decimal" min="0"':""}>`}</label>`;
+const CH=(g,L)=>`<div class="chips">${L.map(([v,x])=>`<label><input type="checkbox" data-g="${g}" value="${v}"><span>${x}</span></label>`).join("")}</div>`;
+const SEC=[
+["١) العميل والفكرة","افهم الفكرة زين قبل لا تحچي بالأرقام",[["name","شنو اسمك أو اسم شركتك؟","t"],["idea","شنو فكرة الـ SaaS مالتك بجملة وحدة؟","a"],["problem","شنو المشكلة اللي تحلها؟ ومنو اللي يعاني منها بالضبط؟","a"],["model","شلون راح يشتغل مشروعك؟",  "s",[["B2B","شركات تبيع لشركات (B2B)"],["B2C","أفراد عاديين (B2C)"],["B2B2C","B2B2C"],["MP","سوق / وسيط بين طرفين"]]],["stage","وين واصل بالمشروع هسه؟","s",[["idea","بس فكرة براسي"],["design","عندي تصميم مبدئي"],["mvp","عندي نسخة أولية (MVP)"],["live","شغّال وأريد أطوّره"]]],["comp","منو المنافسين؟ وشنو البدائل الموجودة هسه؟","a"]]],
+["٢) النتيجة المنشودة والقيمة","كل ما كانت النتيجة أوضح وأسرع، تبرير السعر يصير أسهل",[["outcome","شنو أهم نتيجة يحصل عليها المستخدم مالك؟ وبأي رقم نقيسها؟","a"],["time","بكم وقت يشوف المستخدم النتيجة؟","t"],["alt","هسه شلون يحل مشكلته؟ وكم يدفع؟","t"],["arpu","شكد تريد تاخذ من المشترك بالشهر؟ ($)","n"],["users","كم مشترك تريد توصل له خلال 12 شهر؟","n"]]],
+["٤) اكتساب العملاء","منين راح تجيب أول زبائنك؟ (الطرق الأربعة الأساسية)",[["first100","شلون راح تجيب أول 100 زبون؟","a"]],"ch"],
+["٥) القرار والميزانية","اعرف منو يقرر وشنو اللي مخوّفه",[["budget","شكد ميزانيتك تقريباً؟ ($)","n"],["decider","منو اللي ياخذ القرار؟","s",[["solo","أني بروحي"],["partner","أني وشريكي"],["board","مجلس / مستثمرين"]]],["deadline","متى تريد تطلق؟ وليش هذا الموعد؟","t"],["worries","شنو أكبر 3 مخاوف عندك من تنفيذ المشروع؟","a"],["success","شلون تتخيل النجاح بعد 12 شهر؟","a"]]],
+["٦) التسعير (داخلي — لا يظهر للعميل)","اضبط معاملاتك",[["rate","تكلفة ساعة العمل ($)","n"],["margin","هامش الربح %","n"],["team","عدد المطورين","n"],["cx","تعقيد المشروع","s",[["1","بسيط"],["1.25","متوسط"],["1.6","معقّد"]]],["rush","الاستعجال","s",[["1","عادي"],["1.25","مستعجل"]]],["fx","سعر الدولار بالدينار","n"]]],
+["٧) قفل الصفقة","الضمان والإضافات التي تجعل الرفض صعباً",[["guar","الضمان المعروض","s",Object.entries(GU)]],"bn"]];
+const EMB=/[?&]embed/.test(location.search);if(EMB)document.body.classList.add("emb");let S;try{if(!EMB)S=JSON.parse(localStorage.getItem("ent_session")||"null")}catch(_){}
+S=Object.assign({mods:["auth","dash"],ch:[],bn:[],core:3,integ:0,design:100,cx:"1.25",rush:"1",rate:25,margin:40,team:2,fx:1500,arpu:30,users:200,guar:"proto",model:"B2B",stage:"idea",decider:"solo"},S||{});
+const save=()=>{if(EMB)return;try{localStorage.setItem("ent_session",JSON.stringify(S))}catch(_){}};
+$("#fm").innerHTML=SEC.map(([t,h,f,x],i)=>{let b=f.map(F).join("");if(x==="ch")b+=CH("ch",[["cont","محتوى"],["dm","مراسلة مباشرة"],["ads","إعلانات مدفوعة"],["ref","شركاء وتوصيات"]]);if(x==="bn")b+=CH("bn",BN);return`<section class="cd${t.includes("داخلي")?" int":""}"><h2>${t}</h2><div class="h">${h}</div>${b}</section>`}).join("");
+$("#fm").insertAdjacentHTML("beforeend","");
+/* قسم النطاق (٣) يُدرج بعد الثاني */
+const sc=document.createElement("section");sc.className="cd";sc.innerHTML=`<h2>٣) نطاق المنتج</h2><div class="h">شنو اللي يحتاجه منتجك؟ كل وحدة تنحسب بساعاتها</div>${CH("mods",MODS.map(m=>[m[0],m[1]+' <small>'+m[2]+'س</small>']))}<div class="r2">${F(["core","كم شاشة أو وحدة أساسية بفكرتك؟ (30س لكل وحدة)","n"])}${F(["integ","كم ربط مع خدمات خارجية تحتاج؟ (25س لكل ربط)","n"])}</div>${F(["design","شكد تريد التصميم فخم؟","s",[["40","عادي"],["100","مخصّص إلك"],["180","فاخر"]]])}`;
+$("#fm").children[1].after(sc);
+function sync(){document.querySelectorAll("[data-k]").forEach(e=>{if(S[e.dataset.k]!=null)e.value=S[e.dataset.k]});
+document.querySelectorAll("[data-g]").forEach(e=>{e.checked=(S[e.dataset.g]||[]).includes(e.value)})}sync();
+document.addEventListener("input",e=>{const t=e.target;if(t.dataset.k)S[t.dataset.k]=t.type==="number"?(t.value===""?"":+t.value):t.value;else if(t.dataset.g){const a=S[t.dataset.g]=S[t.dataset.g]||[],i=a.indexOf(t.value);if(t.checked&&i<0)a.push(t.value);if(!t.checked&&i>-1)a.splice(i,1)}else return;save();calc()});
+let TXT="";
+function calc(){
+  const sel=(S.mods||[]).filter(i=>M[i]),ids=t=>sel.filter(i=>M[i][3]<=t),core=+S.core||0,integ=+S.integ||0,des=+S.design||40,cx=+S.cx||1,rs=+S.rush||1,rate=+S.rate||0,mg=(+S.margin||0)/100,fx=+S.fx||1500;
+  const P=h=>{const hh=h*1.2*cx*rs*1.15;return{h:hh,p:hh*rate*(1+mg)}};
+  const H=(L,c,i,d)=>d+c*30+i*25+L.reduce((a,x)=>a+M[x][2],0);
+  const mvp=P(H(ids(1),Math.min(core,3),0,40)),lau=P(H(ids(2),core,integ,des)),sca=P(H(sel,core,integ,des));
+  const ups=sel.filter(i=>M[i][3]===3).map(i=>[M[i][1],P(M[i][2]).p]);
+  const wk=Math.max(2,Math.ceil(lau.h/((+S.team||1)*30))),ret=Math.max(300,r50(lau.p*.05)),att=r50(lau.p*.1),host=50+20*integ;
+  const arpu=+S.arpu||0,be=arpu>0?Math.ceil(lau.p/(arpu*6)):0,B=+S.budget||0;
+  let vd="";if(B){const d=lau.p/B;vd=d<=1.05?`<span class="ok">ضمن ميزانيته (${Math.round(d*100)}% منها)</span>`:`<span class="wn">أعلى من ميزانيته بنسبة ${Math.round((d-1)*100)}% — قدّم باقة الانطلاق (${usd(mvp.p)}) ثم وسّع لاحقاً</span>`}
+  const ck=[["نتيجة محددة بالأرقام",/\d/.test(S.outcome||"")],["زمن ظهور النتيجة",!!S.time],["ضمان يخفّض المخاطرة",S.guar&&S.guar!=="0"],["خطة لأول 100 عميل",!!(S.first100||(S.ch||[]).length)],["ميزانية معروفة",!!B]];
+  const g=S.guar&&S.guar!=="0"?GU[S.guar]:"";
+  const bn=(S.bn||[]).map(b=>BN.find(x=>x[0]===b)[1]);
+  $("#sum").innerHTML=`<h2>التكلفة التقديرية — باقة الإطلاق</h2><div class="big">${usd(lau.p)}</div><div class="mt">نطاق السعر: ${usd(lau.p*.85)} – ${usd(lau.p*1.2)} · ≈ ${n0(lau.p*fx)} د.ع</div><div class="mt">${n0(lau.h)} ساعة · نحو ${wk} أسبوعاً<span class="int"> · تكلفتك الداخلية ${usd(lau.p/(1+mg))}</span></div>
+  <h3>سلّم الباقات</h3><table><tr><td>انطلاق (MVP أساسي)</td><td>${usd(mvp.p)}</td></tr><tr><td>إطلاق (المطلوب حالياً)</td><td>${usd(lau.p)}</td></tr><tr><td>توسّع (كل ما اختير)</td><td>${usd(sca.p)}</td></tr></table>
+  <h3>نموذج المال</h3><table><tr><td>جذب: جلسة اكتشاف ونموذج أولي (تُخصم من العقد)</td><td>${usd(att)}</td></tr>${ups.map(u=>`<tr><td>رفع: ${u[0]}</td><td>${usd(u[1])}</td></tr>`).join("")||'<tr><td>رفع: لم تُختر إضافات توسّع</td><td>—</td></tr>'}<tr><td>خفض: ابدأ بباقة الانطلاق</td><td>${usd(mvp.p)}</td></tr><tr><td>استمرارية: صيانة وتطوير شهري</td><td>${usd(ret)}/شهر</td></tr><tr><td>استضافة وأدوات (تقديري)</td><td>${usd(host)}/شهر</td></tr></table>
+  <div class="mt">الدفع المقترح: 40% عند البدء · 30% عند الاعتماد الوسيط · 30% عند التسليم</div>
+  <h3>منظور العميل</h3><div class="ck"><div>${vd||"أدخل ميزانيته لمقارنتها بالسعر"}</div><div>يسترد سعر الإطلاق خلال 12 شهراً بنحو <b>${be?n0(be):"—"}</b> مشترك (بسعر $${n0(arpu)} شهرياً)</div></div>
+  <h3>جاهزية القفل</h3><div class="ck">${ck.map(c=>`<div class="${c[1]?"ok":"wn"}">${c[1]?"✓":"○"} ${c[0]}</div>`).join("")}</div>
+  <div class="bar"><button class="p" id="cp" type="button">نسخ الملخص</button><button id="pr" type="button">طباعة / PDF</button><button id="rs" type="button">جلسة جديدة</button></div>`;
+  TXT=`جلسة استراتيجية — ${S.name||""}\nالفكرة: ${S.idea||""}\nالمشكلة: ${S.problem||""}\nالنتيجة المنشودة: ${S.outcome||""}\nالميزانية: ${B?"$"+n0(B):"—"} · الموعد: ${S.deadline||"—"}\nالمخاوف: ${S.worries||""}\n\nباقة الإطلاق: ${usd(lau.p)} (${usd(lau.p*.85)}–${usd(lau.p*1.2)}) خلال ${wk} أسبوعاً\nباقة الانطلاق: ${usd(mvp.p)} · باقة التوسع: ${usd(sca.p)}\nجلسة اكتشاف: ${usd(att)} · صيانة شهرية: ${usd(ret)}\nالضمان: ${g||"—"}\nإضافات: ${bn.join("، ")||"—"}`;
+  $("#cp").onclick=e=>{const b=e.target,o=b.textContent,d=()=>{b.textContent="تم النسخ";setTimeout(()=>b.textContent=o,1500)},fb=()=>{try{const a=document.createElement("textarea");a.value=TXT;document.body.append(a);a.select();document.execCommand("copy");a.remove()}catch(_){}d()};try{navigator.clipboard?navigator.clipboard.writeText(TXT).then(d,fb):fb()}catch(_){fb()}};
+  $("#pr").onclick=()=>window.print();
+  if(EMB)parent.postMessage({t:"state",S,price:r50(lau.p),h:document.documentElement.scrollHeight},location.origin);
+  $("#rs").onclick=()=>{if(confirm("بدء جلسة جديدة ومسح البيانات الحالية؟")){try{localStorage.removeItem("ent_session")}catch(_){}location.reload()}};
+}
+calc();
+addEventListener("message",e=>{const d=e.data;if(!EMB||e.origin!==location.origin||!d||d.t!=="init")return;S=Object.assign(S,d.S||{});if(d.theme)document.documentElement.dataset.theme=d.theme;else delete document.documentElement.dataset.theme;sync();calc()});
+if(EMB)parent.postMessage({t:"ready"},location.origin);
+</script></body></html>
