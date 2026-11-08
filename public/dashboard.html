@@ -115,10 +115,12 @@ tr.ed-on{background:var(--s)}.amtp{font-weight:600}
   <div class="gt nc">النظام</div>
   <a class="nv nc" id="n3" href="#/settings/profile"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c.8-4 4-6 8-6s7.2 2 8 6"/></svg>الإعدادات</a>
   <a class="nv nc" id="n4" href="#/settings/users"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>المستخدمون</a>
-  <div class="dv nc" id="gfin" hidden></div>
+  <div class="gt nc" id="gfin" hidden>المالية</div>
   <a class="nv nc" id="n7" href="#/finance" hidden><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>الإحصائيات</a>
-  <a class="nv nc" id="n10" href="#/marketing" hidden><svg class="i" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1zM15 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/></svg>التسويق</a>
   <a class="nv nc" id="n8" href="#/finance/editor" hidden><svg class="i" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16zM13.5 6.5l4 4"/></svg>المحرر</a>
+  <div class="gt nc" id="gmk" hidden>التسويق</div>
+  <a class="nv nc" id="n10" href="#/marketing/accounts" hidden><svg class="i" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>حسابات التواصل</a>
+  <a class="nv nc" id="n11" href="#/marketing/factory" hidden><svg class="i" viewBox="0 0 24 24"><path d="M12 3l1.8 4.7 4.7 1.8-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>المصنع</a>
   
   <div class="fl">
     <a class="nv nc" href="/"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>الموقع الرئيسي</a>
@@ -791,19 +793,18 @@ async function finEditor(){
   syncUi();paintForm();draw();
 }
 
-/* ===== التسويق: حسابات التواصل + المصنع ===== */
+/* ===== التسويق: حسابات التواصل الاجتماعي + المصنع ===== */
 /* الحقل الأخير: 0 بلا شرط، "m" يتطلب صورة/فيديو، "v" يتطلب فيديو */
 const PLT=[["facebook","فيسبوك",5000,0],["instagram","إنستغرام",2200,"m"],["x","X (تويتر)",280,0],["linkedin","لينكدإن",3000,0],["tiktok","تيك توك",2200,"v"],["youtube","يوتيوب",5000,"v"]];
 let SOC=null,SOCERR="";
 async function sapi(method,body){try{const r=await fetch("/api/social",{method,credentials:"same-origin",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});const j=await r.json().catch(()=>({}));return{ok:r.ok,st:r.status,j}}catch(_){return{ok:false,j:{}}}}
 async function socLoad(){try{const r=await fetch("/api/social",{credentials:"same-origin"});if(!r.ok){SOCERR=(r.status===404||r.status===405?"مسار /api/social غير موجود على الخادم":"خطأ من الخادم")+" ("+r.status+")";return false}const j=await r.json();SOC=Array.isArray(j.accounts)?j.accounts:[];SOCERR="";return true}catch(_){SOCERR="تعذّر الاتصال بالخادم";return false}}
 async function marketing(){
-  const m=$("#m");m.textContent="";const tab=path()==="marketing/factory"?"f":"a";
-  const tb=h("div","tb");[["a","حسابات التواصل","#/marketing"],["f","المصنع","#/marketing/factory"]].forEach(([k,t,hr])=>{const e=h("a",k===tab?"on":"",t);e.href=hr;tb.append(e)});
+  const m=$("#m");m.textContent="";const fac=path()==="marketing/factory";
   const body=h("div",null,h("p","mt","جارٍ التحميل…"));
-  m.append(h("div","pt",h("div",null,h("h1",null,"التسويق"),h("span","mt","اربط حساباتك وانشر محتواك على كل المنصات دفعة واحدة"))),tb,body);
+  m.append(h("div","pt",h("div",null,h("h1",null,fac?"المصنع":"حسابات التواصل الاجتماعي"),h("span","mt",fac?"أنشئ منشوراً بأي نوع وانشره على كل المنصات المربوطة دفعة واحدة":"اربط حسابات منصاتك لتتمكن من النشر عليها من المصنع"))),body);
   const ok=await socLoad();if(!path().startsWith("marketing"))return;
-  body.textContent="";if(tab==="a")socAccounts(body,ok);else socFactory(body,ok);
+  body.textContent="";if(fac)socFactory(body,ok);else socAccounts(body,ok);
 }
 function socAccounts(body,ok){
   if(!ok)body.append(h("div","cd mb",h("b",null,"تعذّر تحميل الحسابات"),h("p","mt",SOCERR+". الربط الفعلي يتطلب مساراً في الخادم: /api/social.")));
@@ -813,50 +814,56 @@ function socAccounts(body,ok){
     bt.onclick=async()=>{bt.disabled=true;
       if(a){if(!confirm("فصل حساب "+n+"؟")){bt.disabled=false;return}const r=await sapi("DELETE",{platform:k});toast(r.ok?"تم الفصل":uerr(r,"تعذّر الفصل"));route(true);return}
       if(DEMO){const r=await sapi("POST",{platform:k});toast(r.ok?"تم الربط (تجريبي)":uerr(r,"تعذّر الربط"));route(true);return}
-      location.href="/api/social/connect?platform="+k};
-    g.append(h("div","cd",h("div","ch",h("h2",null,n),a?badge("مربوط","ok"):badge("غير مربوط","gr")),h("p","mt",a?(a.name||"—"):"اربط حساب "+n+" للنشر عليه من المصنع"),h("div","ac",bt)));
+      try{const r=await fetch("/api/social/connect?platform="+k+"&return="+encodeURIComponent(location.origin+location.pathname+"#/marketing/accounts"),{credentials:"same-origin",headers:{Accept:"application/json"}}),j=await r.json().catch(()=>({}));
+        if(r.ok&&j.url){location.href=j.url;return}toast(uerr({j,st:r.status},"تعذّر بدء الربط"))}catch(_){toast("تعذّر الاتصال بالخادم")}
+      bt.disabled=false};
+    g.append(h("div","cd",h("div","ch",h("h2",null,n),a?badge("مربوط","ok"):badge("غير مربوط","gr")),h("p","mt",a?(a.name||"—")+(a.connected_at?" · منذ "+fmt(a.connected_at,{dateStyle:"medium"}):""):"اربط حساب "+n+" للنشر عليه من المصنع"),h("div","ac",bt)));
   });
   body.append(g);
 }
 function socFactory(body,ok){
   const C=(SOC||[]).map(a=>a.platform);
-  if(!C.length){body.append(h("div","cd em",ok?"لا توجد حسابات مربوطة. اربط حساباً واحداً على الأقل من تبويب «حسابات التواصل».":"تعذّر تحميل الحسابات: "+SOCERR));return}
-  let ty="text",file=null;const sel=new Set(C);
+  if(!C.length){const go=h("a","btn p","الذهاب إلى حسابات التواصل");go.href="#/marketing/accounts";body.append(h("div","cd em",ok?"لا توجد حسابات مربوطة. اربط حساباً واحداً على الأقل ثم عُد إلى المصنع.":"تعذّر تحميل الحسابات: "+SOCERR,h("div",null,ok?go:null)));return}
+  let ty="text",files=[];const sel=new Set(C);
   const F=(t,...k)=>h("div","fld",h("span",null,t),...k);
   const tg=h("div","sg full"),tbn={};
   const tx=h("textarea");tx.placeholder="اكتب منشورك هنا…";tx.style.minHeight="140px";tx.setAttribute("aria-label","نص المنشور");
   const lk=h("input");lk.type="url";lk.placeholder="https://";lk.setAttribute("aria-label","الرابط");
-  const fi=h("input");fi.type="file";fi.setAttribute("aria-label","الملف");
+  const fi=h("input");fi.type="file";fi.setAttribute("aria-label","الملفات");
   const cnt=h("div","hint"),chp=h("div","chp"),pb=h("button","btn p");pb.type="button";pb.style.flex="1";
-  const res=h("div","cd");res.hidden=true;
-  [["text","نص"],["image","صورة"],["video","فيديو"],["link","رابط"]].forEach(([v,t])=>{const x=h("button",v===ty?"on":"",t);x.type="button";x.onclick=()=>{ty=v;file=null;fi.value="";paint()};tbn[v]=x;tg.append(x)});
+  const res=h("div","cd mb"),pv=h("div","cd");res.hidden=true;
+  [["text","نص"],["image","صور"],["video","فيديو"],["link","رابط"]].forEach(([v,t])=>{const x=h("button",v===ty?"on":"",t);x.type="button";x.onclick=()=>{ty=v;files=[];fi.value="";paint()};tbn[v]=x;tg.append(x)});
   function paint(){
     Object.entries(tbn).forEach(([v,x])=>x.className=v===ty?"on":"");
-    lk.parentNode.hidden=ty!=="link";fi.parentNode.hidden=!(ty==="image"||ty==="video");fi.accept=ty==="video"?"video/*":"image/*";
+    lk.parentNode.hidden=ty!=="link";fi.parentNode.hidden=!(ty==="image"||ty==="video");fi.accept=ty==="video"?"video/*":"image/*";fi.multiple=ty==="image";
     chp.textContent="";PLT.forEach(([k,n])=>{const has=C.includes(k),x=h("button",has&&sel.has(k)?"on":"",n);x.type="button";x.disabled=!has;if(!has)x.title="غير مربوط";x.onclick=()=>{if(sel.has(k))sel.delete(k);else sel.add(k);paint()};chp.append(x)});
     const mn=Math.min(...[...sel].map(k=>PLT.find(p=>p[0]===k)[2]),Infinity),n=tx.value.length;
     cnt.textContent=n+(mn<Infinity?" / "+mn+" (أقصر حد بين المنصات المختارة)":"");cnt.style.color=n>mn?"#dc2626":"";
     pb.textContent="نشر الآن على "+sel.size+" منصة";pb.disabled=!sel.size;
+    pv.textContent="";pv.append(h("div","ch",h("h2",null,"معاينة")));const t=tx.value.trim();
+    if(t)pv.append(h("p",null,t));if(ty==="link"&&lk.value.trim())pv.append(h("p","mt ltr2",lk.value.trim()));
+    files.forEach(f=>{if(f.type.startsWith("image/")){const im=h("img");f._u=f._u||URL.createObjectURL(f);im.src=f._u;im.alt="";im.style.cssText="max-width:100%;max-height:220px;border-radius:10px;margin-top:8px;display:block";pv.append(im)}else pv.append(h("p","mt","ملف: "+f.name))});
+    if(pv.children.length<2)pv.append(h("p","mt","ستظهر معاينة المنشور هنا"));
   }
-  tx.oninput=paint;fi.onchange=()=>{file=fi.files[0]||null};
+  tx.oninput=lk.oninput=paint;fi.onchange=()=>{files=[...fi.files].slice(0,10);paint()};
   pb.onclick=async()=>{
     const text=tx.value.trim(),link=lk.value.trim(),P=PLT.filter(p=>sel.has(p[0]));
-    if(!text&&!file&&!link){toast("اكتب نصاً أو أرفق ملفاً");return}
-    if((ty==="image"||ty==="video")&&!file){toast("اختر ملف "+(ty==="video"?"الفيديو":"الصورة"));return}
+    if(!text&&!files.length&&!link){toast("اكتب نصاً أو أرفق ملفاً");return}
+    if((ty==="image"||ty==="video")&&!files.length){toast("اختر "+(ty==="video"?"ملف الفيديو":"صورة واحدة على الأقل"));return}
     if(ty==="link"&&!/^https?:\/\//i.test(link)){toast("أدخل رابطاً صحيحاً يبدأ بـ https://");return}
     const bad=P.filter(p=>text.length>p[2]||(p[3]==="v"&&ty!=="video")||(p[3]==="m"&&ty!=="image"&&ty!=="video"));
     if(bad.length){toast("المحتوى غير مناسب لـ: "+bad.map(p=>p[1]).join("، ")+" — عدّله أو ألغِ اختيارها");return}
     pb.disabled=true;pb.textContent="جارٍ النشر…";res.hidden=false;res.textContent="";res.append(h("div","ch",h("h2",null,"نتيجة النشر")));
-    const out=await Promise.allSettled(P.map(async p=>{const fd=new FormData();fd.append("platform",p[0]);fd.append("type",ty);fd.append("text",text);if(link)fd.append("link",link);if(file)fd.append("file",file);
+    const out=await Promise.allSettled(P.map(async p=>{const fd=new FormData();fd.append("platform",p[0]);fd.append("type",ty);fd.append("text",text);if(link)fd.append("link",link);files.forEach(f=>fd.append("file",f));
       const r=await fetch("/api/social/publish",{method:"POST",credentials:"same-origin",body:fd}),j=await r.json().catch(()=>({}));return{ok:r.ok&&j.ok!==false,j,st:r.status}}));
     let all=true;
     out.forEach((o,i)=>{const v=o.status==="fulfilled"?o.value:{ok:false,j:{},st:0};if(!v.ok)all=false;res.append(h("div","row",h("span",null,P[i][1]),v.ok?badge("تم النشر","ok"):badge(uerr({j:v.j,st:v.st},"فشل النشر"),"er")))});
-    if(all){tx.value="";lk.value="";file=null;fi.value=""}
+    if(all){tx.value="";lk.value="";files=[];fi.value=""}
     toast(all?"تم النشر على كل المنصات":"اكتمل النشر مع وجود أخطاء");paint();
   };
   const FC=h("div","cd mb");
-  FC.append(h("div","ch",h("h2",null,"منشور جديد")),F("نوع المنشور",tg),F("النص",tx,cnt),F("الرابط",lk),F("الملف",fi),F("المنصات (المربوطة فقط)",chp),h("div","bar",pb));
-  body.append(FC,res);paint();
+  FC.append(h("div","ch",h("h2",null,"منشور جديد")),F("نوع المنشور",tg),F("النص",tx,cnt),F("الرابط",lk),F("الملفات",fi),F("المنصات (المربوطة فقط)",chp),h("div","bar",pb));
+  body.append(h("div","ed",h("div",null,FC,res),h("div","sk",pv)));paint();
 }
 
 /* التوجيه */
@@ -864,8 +871,8 @@ const path=()=>location.hash.replace(/^#\/?/,"")||"overview";
 function route(keep){
   if(isCL()){clientRoute(path());return}
   const p=path(),l=p==="leads"||p.startsWith("leads/"),pf=p==="settings/profile",us=p==="settings/users"&&can("users"),ld=p.startsWith("leads/"),pl=p==="pipeline"||p.startsWith("pipeline/"),ps=pl?p.split("/")[1]||"":"";
-  const cc=p==="clients"&&can("clients"),fi=(p==="finance"&&can("fin_view"))||(p==="finance/editor"&&can("fin_edit")),mk=(p==="marketing"||p==="marketing/factory")&&can("marketing");
-  $("#n1").className="nv nc"+(!l&&!pf&&!us&&!pl&&!cc&&!fi&&!mk&&!p.startsWith("settings")?" on":"");$("#n2").className="nv nc"+(l?" on":"");$("#n3").className="nv nc"+(pf||(p.startsWith("settings")&&!us)?" on":"");$("#n4").className="nv nc"+(us?" on":"");$("#n6").className="nv nc"+(cc?" on":"");$("#n7").className="nv nc"+(fi&&p==="finance"?" on":"");$("#n8").className="nv nc"+(fi&&p==="finance/editor"?" on":"");$("#n4").hidden=!can("users");$("#n6").hidden=!can("clients");$("#n7").hidden=!can("fin_view");$("#n8").hidden=!can("fin_edit");$("#n10").hidden=!can("marketing");$("#n10").className="nv nc"+(mk?" on":"");$("#gfin").hidden=!(can("fin_view")||can("fin_edit"));if(pl&&!keep)PO=true;$("#n5").className="nv nc"+(pl?" on":"")+(PO?" open":"");$("#n5").setAttribute("aria-expanded",PO);const sb=$("#sub");sb.className="sub nc"+(PO?" on":"");sb.textContent="";ST.forEach(([k,t])=>{const a=h("a","nv"+(pl&&ps===k?" on":""),t,h("em",null,String(ALL.filter(b=>stOf(b)===k).length)));a.href="#/pipeline/"+k;sb.append(a)});
+  const cc=p==="clients"&&can("clients"),fi=(p==="finance"&&can("fin_view"))||(p==="finance/editor"&&can("fin_edit")),mk=p.startsWith("marketing")&&can("marketing");
+  $("#n1").className="nv nc"+(!l&&!pf&&!us&&!pl&&!cc&&!fi&&!mk&&!p.startsWith("settings")?" on":"");$("#n2").className="nv nc"+(l?" on":"");$("#n3").className="nv nc"+(pf||(p.startsWith("settings")&&!us)?" on":"");$("#n4").className="nv nc"+(us?" on":"");$("#n6").className="nv nc"+(cc?" on":"");$("#n7").className="nv nc"+(fi&&p==="finance"?" on":"");$("#n8").className="nv nc"+(fi&&p==="finance/editor"?" on":"");$("#n4").hidden=!can("users");$("#n6").hidden=!can("clients");$("#n7").hidden=!can("fin_view");$("#n8").hidden=!can("fin_edit");$("#gmk").hidden=$("#n10").hidden=$("#n11").hidden=!can("marketing");$("#n10").className="nv nc"+(mk&&p!=="marketing/factory"?" on":"");$("#n11").className="nv nc"+(mk&&p==="marketing/factory"?" on":"");$("#gfin").hidden=!(can("fin_view")||can("fin_edit"));if(pl&&!keep)PO=true;$("#n5").className="nv nc"+(pl?" on":"")+(PO?" open":"");$("#n5").setAttribute("aria-expanded",PO);const sb=$("#sub");sb.className="sub nc"+(PO?" on":"");sb.textContent="";ST.forEach(([k,t])=>{const a=h("a","nv"+(pl&&ps===k?" on":""),t,h("em",null,String(ALL.filter(b=>stOf(b)===k).length)));a.href="#/pipeline/"+k;sb.append(a)});
   const nn=ALL.filter(b=>stOf(b)==="new").length;$("#nb").textContent=nn;$("#bn").textContent=nn;$("#bn").hidden=!nn;
   const sy=window.scrollY;
   try{(cc?clientsPage:mk?marketing:fi?(p==="finance/editor"?finEditor:finStats):us?usersPage:p.startsWith("settings")?profile:pl?()=>pipeline(ps):ld?()=>leadPage(p.split("/")[1]):l?leads:overview)()}catch(e){console.error(e);const m=$("#m");m.textContent="";m.append(h("p","mt","تعذّر عرض الصفحة: "+e.message))}
