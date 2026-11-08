@@ -76,7 +76,7 @@ body:not([data-role=admin]) .ao{display:none!important}body[data-role=client] .n
 .fb{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:16px}
 .fw:fullscreen{background:var(--bg);padding:24px;overflow:auto}.fw:-webkit-full-screen{background:var(--bg);padding:24px;overflow:auto}
 .cw{position:relative;display:inline-block}.dtb{gap:10px}
-.cal{position:absolute;top:calc(100% + 8px);inset-inline-start:0;z-index:70;background:var(--c);border:1px solid var(--b);border-radius:16px;box-shadow:0 16px 40px rgba(0,0,0,.2);display:flex;width:max-content;max-width:calc(100vw - 24px);overflow:hidden;color:var(--t)}
+.cal{position:absolute;top:calc(100% + 8px);inset-inline-start:0;z-index:70;background:var(--c);border:1px solid var(--b);border-radius:16px;box-shadow:0 16px 40px rgba(0,0,0,.2);display:flex;width:max-content;max-width:calc(100vw - 40px);max-height:calc(100dvh - 40px);overflow:auto;color:var(--t)}
 .cal .pz{display:flex;flex-direction:column;gap:2px;padding:12px;border-inline-end:1px solid var(--b);background:var(--s);min-width:140px}
 .cal .pz button{border:0;background:none;text-align:start;padding:8px 10px;border-radius:8px;cursor:pointer;color:var(--m);white-space:nowrap}.cal .pz button:hover{background:var(--c);color:var(--t)}
 .cal .cm{padding:14px;width:310px}.cal .ch3{display:flex;align-items:center;gap:6px;margin-bottom:10px}.cal .ch3 select{height:34px;padding:0 8px;font-size:13px;flex:1;min-width:0}
@@ -87,14 +87,14 @@ body:not([data-role=admin]) .ao{display:none!important}body[data-role=client] .n
 .cal .d.s{background:var(--br);color:var(--brt);border-radius:10px;font-weight:600}
 .cal .d.m::after{content:"";position:absolute;bottom:4px;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:currentColor;opacity:.5}
 .cal .cf{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--b);font-size:13px}
-@media(max-width:700px){.cal{position:fixed;inset:auto 10px 10px 10px;width:auto;flex-direction:column;max-height:90vh;overflow:auto}.cal .pz{flex-direction:row;flex-wrap:wrap;border-inline-end:0;border-bottom:1px solid var(--b)}.cal .cm{width:auto}}
+@media(max-width:700px){.cal{position:fixed;inset:auto 16px 16px 16px;width:auto;flex-direction:column;max-height:80dvh;overflow:auto}.cal .pz{flex-direction:row;flex-wrap:wrap;border-inline-end:0;border-bottom:1px solid var(--b)}.cal .cm{width:auto}}
 .ed{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;align-items:start}.ed .sk{position:sticky;top:84px}.ed .g4{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}.ed .kp{padding:16px}.ed .kp .v{font-size:20px;margin-top:12px}.ed .kp .ic{width:38px;height:38px}.ed .kp span.l{margin-top:10px}
 @media(max-width:1100px){.ed{grid-template-columns:1fr}.ed .sk{position:static}}
 .fld{display:block;margin-bottom:14px}.fld>span{display:block;color:var(--m);font-size:13px;margin-bottom:6px}.fld input,.fld select,.fld textarea{width:100%}.fld .cw{display:block}.fld .cw .dtb{width:100%;justify-content:flex-start}
 .amt{display:flex;gap:8px;align-items:center}.amt input{flex:1;min-width:0}.sg.full{display:flex;width:100%}.sg.full button{flex:1}.hint{color:var(--m);font-size:12.5px;margin-top:6px;min-height:18px}
 .chp{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.chp button{border:1px solid var(--b);background:var(--c);border-radius:99px;padding:3px 12px;font-size:12.5px;cursor:pointer;color:var(--m)}.chp button:hover{color:var(--t);border-color:var(--t)}.chp button.on{background:var(--br);color:var(--brt);border-color:var(--br)}
 tr.ed-on{background:var(--s)}.amtp{font-weight:600}
-.dv{height:1px;background:var(--b);margin:10px 6px}
+.ut .btn:disabled{cursor:not-allowed}.chp button:disabled{opacity:.45;cursor:not-allowed}.dv{height:1px;background:var(--b);margin:10px 6px}
 .fw.pfs{position:fixed;inset:0;z-index:80;background:var(--bg);padding:24px;overflow:auto}
 .sg.ty button.on.i{background:#16a34a;color:#fff}.sg.ty button.on.x{background:#dc2626;color:#fff}
 .amtp.i{color:#16a34a}.amtp.x{color:#dc2626}
@@ -117,6 +117,7 @@ tr.ed-on{background:var(--s)}.amtp{font-weight:600}
   <a class="nv nc" id="n4" href="#/settings/users"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>المستخدمون</a>
   <div class="dv nc" id="gfin" hidden></div>
   <a class="nv nc" id="n7" href="#/finance" hidden><svg class="i" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>الإحصائيات</a>
+  <a class="nv nc" id="n10" href="#/marketing" hidden><svg class="i" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1zM15 9a4 4 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/></svg>التسويق</a>
   <a class="nv nc" id="n8" href="#/finance/editor" hidden><svg class="i" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16zM13.5 6.5l4 4"/></svg>المحرر</a>
   
   <div class="fl">
@@ -341,9 +342,10 @@ function profile(){
   m.append(h("div","pt",h("h1",null,"الإعدادات")),stabs("profile"),h("div","g3",A,P));
 }
 const UERR={exists:"هذا البريد مسجّل مسبقاً",self:"لا يمكنك تنفيذ ذلك على حسابك",last_admin:"لا يمكن إزالة آخر مدير",invalid_input:"تحقق من البيانات (كلمة المرور 10 أحرف على الأقل)",forbidden:"غير مصرّح"};
-async function uapi(method,body){try{const r=await fetch("/api/users",{method,credentials:"same-origin",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});const j=await r.json().catch(()=>({}));return{ok:r.ok,j}}catch(_){return{ok:false,j:{}}}}
+const uerr=(r,d)=>(UERR[r.j.error]||r.j.message||(r.j.error?"خطأ: "+r.j.error:d))+(r.st?" ("+r.st+")":r.j.error?"":" — تعذّر الاتصال بالخادم");
+async function uapi(method,body){try{const r=await fetch("/api/users",{method,credentials:"same-origin",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});const j=await r.json().catch(()=>({}));return{ok:r.ok,st:r.status,j}}catch(_){return{ok:false,j:{}}}}
 /* [الاسم الكامل، الاسم المختصر، فريق العمل، مدير] — تتبع الصلاحيات دور الحساب في الخادم */
-const PERMS=[["عرض العملاء","عرض",true,true,"view"],["تحديث الحالة والملاحظات","تحديث",true,true,"update"],["تصدير CSV","تصدير",false,true,"export"],["إدارة المستخدمين","إدارة",false,true,"users"],["حسابات العملاء","عملاء",false,true,"clients"],["المالية — الإحصائيات","إحصائيات",false,true,"fin_view"],["المالية — المحرر","محرر",false,true,"fin_edit"]];
+const PERMS=[["عرض العملاء","عرض",true,true,"view"],["تحديث الحالة والملاحظات","تحديث",true,true,"update"],["تصدير CSV","تصدير",false,true,"export"],["إدارة المستخدمين","إدارة",false,true,"users"],["حسابات العملاء","عملاء",false,true,"clients"],["المالية — الإحصائيات","إحصائيات",false,true,"fin_view"],["المالية — المحرر","محرر",false,true,"fin_edit"],["التسويق","تسويق",false,true,"marketing"]];
 /* الصلاحية الفعلية: تعديل خاص بالحساب إن وُجد، وإلا الافتراضي حسب الدور */
 const canU=(u,k)=>{if(!u||u.role==="client")return false;if(u.perms&&typeof u.perms[k]==="boolean")return u.perms[k];const d=PERMS.find(x=>x[4]===k);return d?((u.role==="admin"||u.isAdmin===true)?d[3]:d[2]):false};
 const can=k=>canU(ME,k);
@@ -363,11 +365,11 @@ async function usersPage(){
   add.onclick=async()=>{add.disabled=true;const r=await uapi("POST",{email:em.value,password:pw.value,role:rl.value});add.disabled=false;if(!r.ok){toast(UERR[r.j.error]||"تعذّر الإضافة");return}em.value=pw.value="";toast("تمت الإضافة");load()};
   const form=h("div","cd");form.append(h("div","ch",h("h2",null,"إضافة مستخدم")),h("div","bar",em,pw,rl,add));
   /* مصفوفة الصلاحيات: تحكّم لكل حساب */
-  let MXU=null;
+  let MXU=null,MXB=false;
   function drawMx(){
     mx.textContent="";
     const cand=U.filter(u=>u.role!=="client");
-    if(!cand.some(u=>u.id===MXU))MXU=cand.length?cand[0].id:null;
+    if(!cand.some(u=>u.id===MXU)){const o=cand.find(u=>u.id!==MEID)||cand[0];MXU=o?o.id:null}
     const ms=h("select");ms.setAttribute("aria-label","اختر الحساب");
     cand.forEach(u=>ms.append(Object.assign(h("option",null,u.email+(u.id===MEID?" (أنت)":"")+" — "+(u.role==="admin"?"مدير":"فريق العمل")),{value:String(u.id)})));
     if(MXU!=null)ms.value=String(MXU);
@@ -380,13 +382,15 @@ async function usersPage(){
     PERMS.forEach(([n,,,,k])=>{
       const on=canU(u,k),ov=!!(u.perms&&typeof u.perms[k]==="boolean");
       const bt=h("button","btn s"+(on?"":" p"),on?"تعطيل":"تفعيل");bt.type="button";bt.disabled=self;if(self)bt.title="لا يمكنك تعديل صلاحيات حسابك";
-      bt.onclick=async()=>{bt.disabled=true;const r=await uapi("PATCH",{id:u.id,perms:{...(u.perms||{}),[k]:!on}});toast(r.ok?(on?"تم تعطيل الصلاحية":"تم تفعيل الصلاحية"):(UERR[r.j.error]||"تعذّر التنفيذ"));load()};
+      bt.onclick=async()=>{if(MXB)return;MXB=true;const prev=u.perms;u.perms={...(prev||{}),[k]:!on};drawMx();
+        const r=await uapi("PATCH",{id:u.id,perms:u.perms});MXB=false;
+        if(r.ok){toast(on?"تم تعطيل الصلاحية":"تم تفعيل الصلاحية");load()}else{u.perms=prev;drawMx();toast((UERR[r.j.error]||"تعذّر حفظ الصلاحية")+(r.st?" ("+r.st+")":""))}};
       tb.append(h("tr",null,h("td",null,n),h("td",null,badge(on?"مفعّلة":"معطّلة",on?"ok":"er"),ov?"":h("small","mt","  افتراضي الدور")),h("td",null,bt)));
     });
     t.append(h("thead",null,hr),tb);t.style.minWidth="520px";
     const f=h("div","bar");f.style.marginTop="14px";
     if(u.perms&&Object.keys(u.perms).length){const rs=h("button","btn s","إعادة للافتراضي");rs.type="button";rs.disabled=self;rs.onclick=async()=>{rs.disabled=true;const r=await uapi("PATCH",{id:u.id,perms:{}});toast(r.ok?"تمت الإعادة لصلاحيات الدور":(UERR[r.j.error]||"تعذّر التنفيذ"));load()};f.append(rs)}
-    if(!u.active)f.append(badge("الحساب معطّل","er"));
+    if(!u.active)f.append(badge("الحساب معطّل","er"));if(self)f.append(h("span","mt","هذا حسابك — لا يمكنك تعديل صلاحياتك، اختر حساباً آخر من القائمة أعلاه."));
     mx.append(h("div","tw",t),f);
   }
   m.append(stats,list,mx,form);
@@ -433,8 +437,8 @@ const pnm=id=>{const b=ALL.find(x=>String(x.id)===String(id));return b?b.name:"�
 let CU=[],CQ="",CF="",CPG=1;
 async function loadCU(){try{const r=await fetch("/api/users",{credentials:"same-origin"});const j=await r.json();if(j.ok&&Array.isArray(j.users)){CU=j.users;return true}}catch(_){}return false}
 const accOf=b=>CU.find(u=>u.role==="client"&&String(u.booking_id)===String(b.id));
-const genPw=()=>{const c="abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789",a=new Uint32Array(12);crypto.getRandomValues(a);return[...a].map(x=>c[x%c.length]).join("")};
-async function accDo(method,body,msg){const r=await uapi(method,body);toast(r.ok?msg:(UERR[r.j.error]||"تعذّر التنفيذ"));await loadCU();if(path()==="clients")route(true);return r.ok}
+const genPw=()=>{const c="abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789";for(;;){const a=new Uint32Array(12);crypto.getRandomValues(a);const p=[...a].map(x=>c[x%c.length]).join("");if(/[a-z]/.test(p)&&/[A-Z]/.test(p)&&/\d/.test(p))return p}};
+async function accDo(method,body,msg){const r=await uapi(method,body);toast(r.ok?msg:uerr(r,"تعذّر التنفيذ"));await loadCU();if(path()==="clients")route(true);return r.ok}
 async function openAcc(b,cred){
   await loadCU();
   const p=$("#pn");p.textContent="";const u=accOf(b);
@@ -445,13 +449,23 @@ async function openAcc(b,cred){
     cp.onclick=()=>{try{navigator.clipboard.writeText("رابط الدخول: "+location.origin+LOGIN+"\nالبريد: "+cred.email+"\nكلمة المرور: "+cred.password).then(()=>{cp.textContent="تم النسخ"})}catch(_){}};
     p.append(h("div","cd mb",h("b",null,"بيانات الدخول (تظهر مرة واحدة، انسخها الآن)"),kvr("البريد",cred.email,1),kvr("كلمة المرور",cred.password,1),h("div","ac",cp)));
   }
-  if(!u){
+  if(!u&&cred){p.append(h("div","em","تم إنشاء الحساب، لكنه لم يظهر في القائمة بعد. حدّث الصفحة للتأكد."))}
+  else if(!u){
     const em=h("input");em.type="email";em.value=b.email||"";em.autocomplete="off";em.style.width="100%";em.setAttribute("aria-label","البريد الإلكتروني");
     const pw=h("input");pw.type="text";pw.value=genPw();pw.autocomplete="off";pw.style.flex="1";pw.style.minWidth="0";pw.setAttribute("aria-label","كلمة المرور");
     const rg=h("button","btn","توليد");rg.type="button";rg.onclick=()=>{pw.value=genPw()};
-    const go=h("button","btn p","منح الحساب");go.type="button";
-    go.onclick=async()=>{go.disabled=true;const e1=em.value.trim(),p1=pw.value;const r=await uapi("POST",{email:e1,password:p1,role:"client",booking_id:b.id});if(!r.ok){go.disabled=false;toast(UERR[r.j.error]||"تعذّر إنشاء الحساب");return}toast("تم منح الحساب");await loadCU();if(path()==="clients")route(true);openAcc(b,{email:e1,password:p1})};
-    p.append(h("dt",null,"البريد الإلكتروني (اسم الدخول)"),em,h("dt",null,"كلمة المرور (10 أحرف على الأقل)"),h("div","bar",pw,rg),h("div","ac",go));
+    const er=h("div","hint");er.setAttribute("role","alert");er.style.color="#dc2626";
+    const go=h("button","btn p","إنشاء الحساب");go.type="button";
+    const run=async()=>{
+      const e1=em.value.trim().toLowerCase(),p1=pw.value;er.textContent="";
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e1)){er.textContent="أدخل بريداً إلكترونياً صحيحاً";em.focus();return}
+      if(p1.length<10){er.textContent="كلمة المرور يجب أن تكون 10 أحرف على الأقل";pw.focus();return}
+      go.disabled=true;go.textContent="جارٍ الإنشاء…";
+      const r=await uapi("POST",{email:e1,password:p1,role:"client",booking_id:b.id});
+      if(!r.ok){go.disabled=false;go.textContent="إنشاء الحساب";er.textContent=uerr(r,"تعذّر إنشاء الحساب");return}
+      toast("تم إنشاء الحساب");await loadCU();if(path()==="clients")route(true);openAcc(b,{email:e1,password:p1})};
+    go.onclick=run;em.onkeydown=pw.onkeydown=ev=>{if(ev.key==="Enter")run()};
+    p.append(h("dt",null,"البريد الإلكتروني (اسم الدخول)"),em,h("dt",null,"كلمة المرور (10 أحرف على الأقل)"),h("div","bar",pw,rg),er,h("div","ac",go));
   }else{
     const kvs=h("div","cd mb");kvs.append(kvr("البريد",u.email,1),kvr("الحالة",u.active?"مفعّل":"معطّل"),kvr("آخر دخول",u.last_login_at?fmt(u.last_login_at):"لم يسجّل الدخول بعد"));
     const np=h("input");np.type="text";np.value=genPw();np.autocomplete="off";np.style.flex="1";np.style.minWidth="0";np.setAttribute("aria-label","كلمة مرور جديدة");
@@ -467,7 +481,7 @@ async function clientsPage(){
   const q=h("input");q.type="search";q.placeholder="ابحث باسم المشروع أو البريد";q.value=CQ;q.setAttribute("aria-label","بحث");
   const fs=h("select");fs.setAttribute("aria-label","تصفية");[["","كل المشاريع"],["with","لديهم حساب"],["without","بدون حساب"]].forEach(([v,t])=>fs.append(Object.assign(h("option",null,t),{value:v})));fs.value=CF;
   const stats=h("div","g3 mb"),body=h("div","cd");
-  m.append(h("div","pt",h("div",null,h("h1",null,"حسابات العملاء"),h("span","mt","امنح صاحب كل مشروع حساباً يتابع منه مرحلة مشروعه فقط")),h("div","bar",q,fs)),stats,body);
+  m.append(h("div","pt",h("div",null,h("h1",null,"حسابات العملاء"),h("span","mt","أنشئ لصاحب كل مشروع حساباً يتابع منه مرحلة مشروعه فقط")),h("div","bar",q,fs)),stats,body);
   body.append(h("p","mt","جارٍ التحميل…"));
   const ok=await loadCU();if(path()!=="clients")return;
   if(!ok){body.textContent="";body.append(h("div","em","تعذّر تحميل الحسابات، تحقق من اتصال /api/users"));return}
@@ -480,7 +494,7 @@ async function clientsPage(){
     if(!L.length)body.append(h("div","em","لا توجد مشاريع مطابقة"));
     L.slice((CPG-1)*PS,CPG*PS).forEach(b=>{
       const u=accOf(b),st=stOf(b);
-      const bt=h("button","btn s",u?"إدارة الحساب":"منح حساب"+"");bt.type="button";if(!u)bt.className="btn s p";bt.onclick=e=>{e.stopPropagation();openAcc(b)};
+      const bt=h("button","btn s",u?"إدارة الحساب":"إنشاء حساب");bt.type="button";if(!u)bt.className="btn s p";bt.onclick=e=>{e.stopPropagation();openAcc(b)};
       const r=h("div","rw cr",
         h("div","nm",h("div","av",ini(b.name)),h("div",null,h("b",null,b.name),h("small",null,b.main_goal||"—"))),
         h("div","c",h("span","ltr",u?u.email:b.email),h("small","ltr",b.whatsapp)),
@@ -606,10 +620,17 @@ function calPicker(o){
 }
 function dateBtn(o){
   const w=h("div","cw"),t=h("button","btn dtb");t.type="button";let pop=null;
-  const close=()=>{if(pop){pop.remove();pop=null;document.removeEventListener("mousedown",out,true);document.removeEventListener("keydown",esc)}};
+  let ro=null;
+  const place=()=>{if(!pop)return;const M=20,vw=document.documentElement.clientWidth,vh=window.innerHeight;
+    if(vw<=700){pop.style.cssText="";return}
+    const r=t.getBoundingClientRect(),pw=pop.offsetWidth,ph=pop.offsetHeight,rtl=getComputedStyle(document.documentElement).direction==="rtl";
+    let l=rtl?r.right-pw:r.left;l=Math.max(M,Math.min(l,vw-pw-M));
+    let tp=r.bottom+8;if(tp+ph>vh-M){const up=r.top-8-ph;tp=up>=M?up:Math.max(M,vh-ph-M)}
+    pop.style.position="fixed";pop.style.insetInlineStart="auto";pop.style.right="auto";pop.style.left=l+"px";pop.style.top=tp+"px"};
+  const close=()=>{if(pop){if(ro)ro.disconnect();ro=null;pop.remove();pop=null;document.removeEventListener("mousedown",out,true);document.removeEventListener("keydown",esc);window.removeEventListener("resize",place);window.removeEventListener("scroll",place,true)}};
   const out=e=>{if(pop&&!w.contains(e.target))close()},esc=e=>{if(e.key==="Escape")close()};
   const refresh=()=>{t.innerHTML=ICAL;t.append(o.label())};
-  t.onclick=()=>{if(pop){close();return}pop=calPicker({...o.get(),onApply:(a,b)=>{close();o.set(a,b)},onCancel:close});w.append(pop);document.addEventListener("mousedown",out,true);document.addEventListener("keydown",esc)};
+  t.onclick=()=>{if(pop){close();return}pop=calPicker({...o.get(),onApply:(a,b)=>{close();o.set(a,b)},onCancel:close});w.append(pop);document.addEventListener("mousedown",out,true);document.addEventListener("keydown",esc);window.addEventListener("resize",place);window.addEventListener("scroll",place,true);place();if(window.ResizeObserver){ro=new ResizeObserver(place);ro.observe(pop)}};
   w.append(t);w.refresh=refresh;refresh();return w;
 }
 
@@ -770,16 +791,84 @@ async function finEditor(){
   syncUi();paintForm();draw();
 }
 
+/* ===== التسويق: حسابات التواصل + المصنع ===== */
+/* الحقل الأخير: 0 بلا شرط، "m" يتطلب صورة/فيديو، "v" يتطلب فيديو */
+const PLT=[["facebook","فيسبوك",5000,0],["instagram","إنستغرام",2200,"m"],["x","X (تويتر)",280,0],["linkedin","لينكدإن",3000,0],["tiktok","تيك توك",2200,"v"],["youtube","يوتيوب",5000,"v"]];
+let SOC=null,SOCERR="";
+async function sapi(method,body){try{const r=await fetch("/api/social",{method,credentials:"same-origin",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});const j=await r.json().catch(()=>({}));return{ok:r.ok,st:r.status,j}}catch(_){return{ok:false,j:{}}}}
+async function socLoad(){try{const r=await fetch("/api/social",{credentials:"same-origin"});if(!r.ok){SOCERR=(r.status===404||r.status===405?"مسار /api/social غير موجود على الخادم":"خطأ من الخادم")+" ("+r.status+")";return false}const j=await r.json();SOC=Array.isArray(j.accounts)?j.accounts:[];SOCERR="";return true}catch(_){SOCERR="تعذّر الاتصال بالخادم";return false}}
+async function marketing(){
+  const m=$("#m");m.textContent="";const tab=path()==="marketing/factory"?"f":"a";
+  const tb=h("div","tb");[["a","حسابات التواصل","#/marketing"],["f","المصنع","#/marketing/factory"]].forEach(([k,t,hr])=>{const e=h("a",k===tab?"on":"",t);e.href=hr;tb.append(e)});
+  const body=h("div",null,h("p","mt","جارٍ التحميل…"));
+  m.append(h("div","pt",h("div",null,h("h1",null,"التسويق"),h("span","mt","اربط حساباتك وانشر محتواك على كل المنصات دفعة واحدة"))),tb,body);
+  const ok=await socLoad();if(!path().startsWith("marketing"))return;
+  body.textContent="";if(tab==="a")socAccounts(body,ok);else socFactory(body,ok);
+}
+function socAccounts(body,ok){
+  if(!ok)body.append(h("div","cd mb",h("b",null,"تعذّر تحميل الحسابات"),h("p","mt",SOCERR+". الربط الفعلي يتطلب مساراً في الخادم: /api/social.")));
+  const g=h("div","g3");
+  PLT.forEach(([k,n])=>{
+    const a=(SOC||[]).find(x=>x.platform===k),bt=h("button","btn s"+(a?"":" p"),a?"فصل الحساب":"ربط الحساب");bt.type="button";bt.disabled=!ok;
+    bt.onclick=async()=>{bt.disabled=true;
+      if(a){if(!confirm("فصل حساب "+n+"؟")){bt.disabled=false;return}const r=await sapi("DELETE",{platform:k});toast(r.ok?"تم الفصل":uerr(r,"تعذّر الفصل"));route(true);return}
+      if(DEMO){const r=await sapi("POST",{platform:k});toast(r.ok?"تم الربط (تجريبي)":uerr(r,"تعذّر الربط"));route(true);return}
+      location.href="/api/social/connect?platform="+k};
+    g.append(h("div","cd",h("div","ch",h("h2",null,n),a?badge("مربوط","ok"):badge("غير مربوط","gr")),h("p","mt",a?(a.name||"—"):"اربط حساب "+n+" للنشر عليه من المصنع"),h("div","ac",bt)));
+  });
+  body.append(g);
+}
+function socFactory(body,ok){
+  const C=(SOC||[]).map(a=>a.platform);
+  if(!C.length){body.append(h("div","cd em",ok?"لا توجد حسابات مربوطة. اربط حساباً واحداً على الأقل من تبويب «حسابات التواصل».":"تعذّر تحميل الحسابات: "+SOCERR));return}
+  let ty="text",file=null;const sel=new Set(C);
+  const F=(t,...k)=>h("div","fld",h("span",null,t),...k);
+  const tg=h("div","sg full"),tbn={};
+  const tx=h("textarea");tx.placeholder="اكتب منشورك هنا…";tx.style.minHeight="140px";tx.setAttribute("aria-label","نص المنشور");
+  const lk=h("input");lk.type="url";lk.placeholder="https://";lk.setAttribute("aria-label","الرابط");
+  const fi=h("input");fi.type="file";fi.setAttribute("aria-label","الملف");
+  const cnt=h("div","hint"),chp=h("div","chp"),pb=h("button","btn p");pb.type="button";pb.style.flex="1";
+  const res=h("div","cd");res.hidden=true;
+  [["text","نص"],["image","صورة"],["video","فيديو"],["link","رابط"]].forEach(([v,t])=>{const x=h("button",v===ty?"on":"",t);x.type="button";x.onclick=()=>{ty=v;file=null;fi.value="";paint()};tbn[v]=x;tg.append(x)});
+  function paint(){
+    Object.entries(tbn).forEach(([v,x])=>x.className=v===ty?"on":"");
+    lk.parentNode.hidden=ty!=="link";fi.parentNode.hidden=!(ty==="image"||ty==="video");fi.accept=ty==="video"?"video/*":"image/*";
+    chp.textContent="";PLT.forEach(([k,n])=>{const has=C.includes(k),x=h("button",has&&sel.has(k)?"on":"",n);x.type="button";x.disabled=!has;if(!has)x.title="غير مربوط";x.onclick=()=>{if(sel.has(k))sel.delete(k);else sel.add(k);paint()};chp.append(x)});
+    const mn=Math.min(...[...sel].map(k=>PLT.find(p=>p[0]===k)[2]),Infinity),n=tx.value.length;
+    cnt.textContent=n+(mn<Infinity?" / "+mn+" (أقصر حد بين المنصات المختارة)":"");cnt.style.color=n>mn?"#dc2626":"";
+    pb.textContent="نشر الآن على "+sel.size+" منصة";pb.disabled=!sel.size;
+  }
+  tx.oninput=paint;fi.onchange=()=>{file=fi.files[0]||null};
+  pb.onclick=async()=>{
+    const text=tx.value.trim(),link=lk.value.trim(),P=PLT.filter(p=>sel.has(p[0]));
+    if(!text&&!file&&!link){toast("اكتب نصاً أو أرفق ملفاً");return}
+    if((ty==="image"||ty==="video")&&!file){toast("اختر ملف "+(ty==="video"?"الفيديو":"الصورة"));return}
+    if(ty==="link"&&!/^https?:\/\//i.test(link)){toast("أدخل رابطاً صحيحاً يبدأ بـ https://");return}
+    const bad=P.filter(p=>text.length>p[2]||(p[3]==="v"&&ty!=="video")||(p[3]==="m"&&ty!=="image"&&ty!=="video"));
+    if(bad.length){toast("المحتوى غير مناسب لـ: "+bad.map(p=>p[1]).join("، ")+" — عدّله أو ألغِ اختيارها");return}
+    pb.disabled=true;pb.textContent="جارٍ النشر…";res.hidden=false;res.textContent="";res.append(h("div","ch",h("h2",null,"نتيجة النشر")));
+    const out=await Promise.allSettled(P.map(async p=>{const fd=new FormData();fd.append("platform",p[0]);fd.append("type",ty);fd.append("text",text);if(link)fd.append("link",link);if(file)fd.append("file",file);
+      const r=await fetch("/api/social/publish",{method:"POST",credentials:"same-origin",body:fd}),j=await r.json().catch(()=>({}));return{ok:r.ok&&j.ok!==false,j,st:r.status}}));
+    let all=true;
+    out.forEach((o,i)=>{const v=o.status==="fulfilled"?o.value:{ok:false,j:{},st:0};if(!v.ok)all=false;res.append(h("div","row",h("span",null,P[i][1]),v.ok?badge("تم النشر","ok"):badge(uerr({j:v.j,st:v.st},"فشل النشر"),"er")))});
+    if(all){tx.value="";lk.value="";file=null;fi.value=""}
+    toast(all?"تم النشر على كل المنصات":"اكتمل النشر مع وجود أخطاء");paint();
+  };
+  const FC=h("div","cd mb");
+  FC.append(h("div","ch",h("h2",null,"منشور جديد")),F("نوع المنشور",tg),F("النص",tx,cnt),F("الرابط",lk),F("الملف",fi),F("المنصات (المربوطة فقط)",chp),h("div","bar",pb));
+  body.append(FC,res);paint();
+}
+
 /* التوجيه */
 const path=()=>location.hash.replace(/^#\/?/,"")||"overview";
 function route(keep){
   if(isCL()){clientRoute(path());return}
   const p=path(),l=p==="leads"||p.startsWith("leads/"),pf=p==="settings/profile",us=p==="settings/users"&&can("users"),ld=p.startsWith("leads/"),pl=p==="pipeline"||p.startsWith("pipeline/"),ps=pl?p.split("/")[1]||"":"";
-  const cc=p==="clients"&&can("clients"),fi=(p==="finance"&&can("fin_view"))||(p==="finance/editor"&&can("fin_edit"));
-  $("#n1").className="nv nc"+(!l&&!pf&&!us&&!pl&&!cc&&!fi&&!p.startsWith("settings")?" on":"");$("#n2").className="nv nc"+(l?" on":"");$("#n3").className="nv nc"+(pf||(p.startsWith("settings")&&!us)?" on":"");$("#n4").className="nv nc"+(us?" on":"");$("#n6").className="nv nc"+(cc?" on":"");$("#n7").className="nv nc"+(fi&&p==="finance"?" on":"");$("#n8").className="nv nc"+(fi&&p==="finance/editor"?" on":"");$("#n4").hidden=!can("users");$("#n6").hidden=!can("clients");$("#n7").hidden=!can("fin_view");$("#n8").hidden=!can("fin_edit");$("#gfin").hidden=!(can("fin_view")||can("fin_edit"));if(pl&&!keep)PO=true;$("#n5").className="nv nc"+(pl?" on":"")+(PO?" open":"");$("#n5").setAttribute("aria-expanded",PO);const sb=$("#sub");sb.className="sub nc"+(PO?" on":"");sb.textContent="";ST.forEach(([k,t])=>{const a=h("a","nv"+(pl&&ps===k?" on":""),t,h("em",null,String(ALL.filter(b=>stOf(b)===k).length)));a.href="#/pipeline/"+k;sb.append(a)});
+  const cc=p==="clients"&&can("clients"),fi=(p==="finance"&&can("fin_view"))||(p==="finance/editor"&&can("fin_edit")),mk=(p==="marketing"||p==="marketing/factory")&&can("marketing");
+  $("#n1").className="nv nc"+(!l&&!pf&&!us&&!pl&&!cc&&!fi&&!mk&&!p.startsWith("settings")?" on":"");$("#n2").className="nv nc"+(l?" on":"");$("#n3").className="nv nc"+(pf||(p.startsWith("settings")&&!us)?" on":"");$("#n4").className="nv nc"+(us?" on":"");$("#n6").className="nv nc"+(cc?" on":"");$("#n7").className="nv nc"+(fi&&p==="finance"?" on":"");$("#n8").className="nv nc"+(fi&&p==="finance/editor"?" on":"");$("#n4").hidden=!can("users");$("#n6").hidden=!can("clients");$("#n7").hidden=!can("fin_view");$("#n8").hidden=!can("fin_edit");$("#n10").hidden=!can("marketing");$("#n10").className="nv nc"+(mk?" on":"");$("#gfin").hidden=!(can("fin_view")||can("fin_edit"));if(pl&&!keep)PO=true;$("#n5").className="nv nc"+(pl?" on":"")+(PO?" open":"");$("#n5").setAttribute("aria-expanded",PO);const sb=$("#sub");sb.className="sub nc"+(PO?" on":"");sb.textContent="";ST.forEach(([k,t])=>{const a=h("a","nv"+(pl&&ps===k?" on":""),t,h("em",null,String(ALL.filter(b=>stOf(b)===k).length)));a.href="#/pipeline/"+k;sb.append(a)});
   const nn=ALL.filter(b=>stOf(b)==="new").length;$("#nb").textContent=nn;$("#bn").textContent=nn;$("#bn").hidden=!nn;
   const sy=window.scrollY;
-  try{(cc?clientsPage:fi?(p==="finance/editor"?finEditor:finStats):us?usersPage:p.startsWith("settings")?profile:pl?()=>pipeline(ps):ld?()=>leadPage(p.split("/")[1]):l?leads:overview)()}catch(e){console.error(e);const m=$("#m");m.textContent="";m.append(h("p","mt","تعذّر عرض الصفحة: "+e.message))}
+  try{(cc?clientsPage:mk?marketing:fi?(p==="finance/editor"?finEditor:finStats):us?usersPage:p.startsWith("settings")?profile:pl?()=>pipeline(ps):ld?()=>leadPage(p.split("/")[1]):l?leads:overview)()}catch(e){console.error(e);const m=$("#m");m.textContent="";m.append(h("p","mt","تعذّر عرض الصفحة: "+e.message))}
   if(keep)window.scrollTo(0,sy);
 }
 window.addEventListener("hashchange",()=>{window.scrollTo(0,0);side(false);document.querySelectorAll(".pop").forEach(x=>x.classList.remove("on"));$("#mu").setAttribute("aria-expanded","false");route()});
@@ -841,6 +930,8 @@ if(DEMO)(()=>{
       if(m==="DELETE"){S.users=S.users.filter(k=>k.id!==b.id);save();return J({ok:true})}
     }
     if(u.startsWith("/api/finance")){if(m==="GET")return J({entries:S.fin,rate:S.rate||1500});S.fin=b.entries;S.rate=b.rate;save();return J({ok:true})}
+    if(u.startsWith("/api/social/publish"))return J({ok:true,id:"demo"+Date.now()});
+    if(u.startsWith("/api/social")){S.social=S.social||[];if(m==="GET")return J({ok:true,accounts:S.social});S.social=S.social.filter(x=>x.platform!==b.platform);if(m==="POST")S.social.push({platform:b.platform,name:"حساب تجريبي",connected_at:new Date().toISOString()});save();return J({ok:true})}
     return J({},404);
   };
   $("#out").onclick=()=>toast("تسجيل الخروج غير مفعّل في الوضع التجريبي");
