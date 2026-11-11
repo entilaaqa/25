@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>انطلاقة — تسجيل الدخول</title>
+<link rel="stylesheet" href="/brand-fonts.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;800&display=swap" rel="stylesheet">
+<style>
+:root{--g:#95BF47;--gd:#5E8E3E;--go:#008060;--ink:#202223;--mut:#C9CCCF;--line:#E1E3E5;--dim:#8d9194;--font:"Thmanyah Sans","Thmanyah",Tahoma,system-ui,sans-serif;box-sizing:border-box}
+*,*::before,*::after{box-sizing:inherit}
+html,body{margin:0;min-height:100%;background:#000;color:#fff;font-family:var(--font);-webkit-text-size-adjust:100%}
+button,input{font-family:inherit}
+#st{position:relative;background:#000;min-height:100dvh;display:flex;flex-direction:column;align-items:center;overflow:hidden;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+#st>*{flex:none}
+.glow,.floor,.motes{position:absolute;left:0;right:0;pointer-events:none}
+.glow{top:0;height:100%;background:radial-gradient(ellipse 70% 52% at 50% 130px,rgba(149,191,71,.42),rgba(94,142,62,.15) 50%,transparent 80%),radial-gradient(ellipse 150% 100% at 50% 130px,rgba(94,142,62,.2),rgba(94,142,62,.1) 55%,rgba(94,142,62,.07)),linear-gradient(180deg,#0c0d0d,#141716 55%,#191c1a);opacity:0;transition:opacity .9s}
+.on .glow{opacity:1}
+.motes{inset:0;opacity:0;transition:opacity 1.2s .4s}.on .motes{opacity:1}
+.m{position:absolute;border-radius:50%;background:#E8F3CF;animation:dr var(--d) ease-in-out infinite alternate}
+@keyframes dr{from{transform:translate(0,0);opacity:.15}to{transform:translate(var(--x),var(--y));opacity:.85}}
+/* lamp */
+.lamp{position:relative;zoom:.82;width:160px;display:flex;flex-direction:column;align-items:center;transform-origin:50% 0;z-index:2}
+.fix{width:78px;height:14px;background:#181919;border-radius:0 0 7px 7px}
+.wire{width:3px;height:clamp(28px,5vh,60px);background:#2b2d2d}
+.sock{width:40px;height:24px;border-radius:5px 5px 0 0;background:repeating-linear-gradient(#8c8a78 0 3px,#6b6a5d 3px 5px);transition:opacity .6s}.on .sock{opacity:.3}
+.bulb{position:relative;width:150px;height:158px;border-radius:50% 50% 50% 50%/56% 56% 44% 44%;background:radial-gradient(circle at 35% 25%,#93958d,#6e7069 58%,#55574f);transition:box-shadow .7s}
+.bulb::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at 50% 42%,#fff,#F1F8DE 52%,#BFDD84 100%);opacity:0;transition:opacity .45s}
+.on .bulb::before{opacity:1}
+.on .bulb{box-shadow:0 0 70px 24px rgba(149,191,71,.55),0 0 160px 60px rgba(149,191,71,.22)}
+.eye,.mouth,.bl,.zz{position:absolute;transition:all .3s}
+.eye{top:56px;width:22px;height:4px;border-radius:3px;background:#4b4c46}
+.eye.l{left:31px}.eye.r{right:31px}
+.on .eye{top:50px;width:15px;height:17px;border-radius:50%;background:var(--ink)}
+.on .eye.l{left:36px}.on .eye.r{right:36px}
+.eye::after{content:"";position:absolute;top:3px;left:3px;width:5px;height:5px;border-radius:50%;background:#fff;opacity:0;transition:opacity .3s}.on .eye::after{opacity:1}
+.mouth{left:50%;top:92px;width:16px;height:3px;margin-left:-8px;border-radius:2px;background:#4b4c46;border-bottom:0 solid var(--ink)}
+.on .mouth{top:82px;width:28px;height:15px;margin-left:-14px;background:transparent;border-bottom-width:3px;border-radius:0 0 28px 28px}
+.bl{top:76px;width:26px;height:15px;border-radius:50%;background:rgba(94,142,62,.5);filter:blur(2px);opacity:0}.bl.l{left:20px}.bl.r{right:20px}.on .bl{opacity:1}
+.zz{right:-22px;top:18px;font-weight:900;font-size:15px;color:#8d8f88;letter-spacing:-1px}.on .zz{opacity:0}
+.pull{position:relative;width:2px;height:calc(88px + var(--dy,0px));background:var(--mut);transform-origin:50% 0;transition:height .5s cubic-bezier(.3,1.8,.5,1),transform .6s cubic-bezier(.3,1.8,.5,1)}
+.pull.sw{animation:sw 2.4s ease-out}
+@keyframes sw{0%{transform:rotate(8deg)}18%{transform:rotate(-6deg)}36%{transform:rotate(4deg)}56%{transform:rotate(-2deg)}78%{transform:rotate(.8deg)}100%{transform:none}}
+.bead{position:absolute;left:-10px;bottom:-12px;width:22px;height:22px;border:0;padding:0;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#E1E3E5 45%,#9aa09a);cursor:grab;touch-action:none;box-shadow:0 2px 6px rgba(0,0,0,.5)}
+.bead:active{cursor:grabbing}.bead:focus-visible{outline:2px solid var(--g);outline-offset:4px}
+.hint{position:absolute;top:calc(100% + 18px);left:50%;transform:translateX(-50%);white-space:nowrap;display:flex;flex-direction:column;align-items:center;font-size:14px;color:var(--mut);pointer-events:none;transition:opacity .4s}
+.on .hint,.dg .hint{opacity:0}
+/* card */
+.card{position:relative;z-index:2;width:min(420px,calc(100% - 36px));margin-top:clamp(0px,.6vh,6px);padding:26px 24px 24px;display:flex;flex-direction:column;gap:14px;border-radius:26px;background:rgba(32,34,35,.78);border:1px solid rgba(149,191,71,.2);box-shadow:0 30px 80px rgba(0,0,0,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;visibility:hidden;transform:translateY(24px) scale(.97);transition:opacity .6s .45s,transform .6s .45s,visibility 0s .45s}
+.on .card{opacity:1;visibility:visible;transform:none}
+.card>*{opacity:0;transform:translateY(10px);transition:opacity .5s,transform .5s}
+.on .card>*{opacity:1;transform:none;transition-delay:calc(.75s + var(--i,0)*.08s)}
+.wm{font-family:Montserrat,Arial,sans-serif;font-weight:800;letter-spacing:-.04em;line-height:1;display:inline-flex;align-items:baseline;direction:ltr;color:#fff}
+.wm em{font-style:normal;font-weight:500;color:var(--mut)}.wm i{font-style:normal;color:var(--g)}
+.hd{display:flex;justify-content:center;font-size:30px;line-height:1}
+.sub{margin:-10px 0 4px;color:var(--mut);font-size:15px}
+.card input[type=email],.card input[type=password],.card input[type=text]{width:100%;height:56px;padding:0 18px;border-radius:18px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-size:16px;outline:0;transition:border-color .2s,box-shadow .2s}
+.card input::placeholder{color:var(--dim)}
+.card input:focus{border-color:var(--go);box-shadow:0 0 0 3px rgba(149,191,71,.35)}
+.pw{position:relative}.pw input{padding-inline-end:68px!important}
+#sh{position:absolute;top:50%;inset-inline-end:10px;transform:translateY(-50%);height:34px;padding:0 10px;border:0;background:none;color:var(--line);font-size:14px;font-weight:700;cursor:pointer;border-radius:8px}
+#sh:hover{color:#fff}
+.row{display:flex;justify-content:space-between;align-items:center;font-size:15px;color:var(--mut)}
+.row label{display:flex;align-items:center;gap:11px;cursor:pointer}
+.row input{appearance:none;-webkit-appearance:none;width:19px;height:19px;margin:0;border-radius:4px;background:#fff;cursor:pointer;display:grid;place-items:center}
+.row input:checked{background:var(--g)}.row input:checked::after{content:"";width:5px;height:10px;border:solid var(--ink);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.row input:focus-visible,.row a:focus-visible,.ca:focus-visible{outline:2px solid var(--g);outline-offset:3px}
+.row a{color:var(--g);font-weight:700;text-decoration:none}
+#err{margin:0;font-size:14px;color:#F6B0A8}#err.ok{color:var(--mut)}
+.go{height:58px;border:0;border-radius:18px;background:linear-gradient(180deg,#A3CC57,var(--g) 40%,#7BA63A);color:var(--ink);font-size:17px;font-weight:700;cursor:pointer;box-shadow:0 8px 28px rgba(149,191,71,.38);transition:transform .15s,box-shadow .2s,opacity .2s}
+.go:hover{box-shadow:0 10px 34px rgba(149,191,71,.55)}.go:active{transform:scale(.985)}.go:disabled{opacity:.6;cursor:wait}
+.go:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.or{display:flex;align-items:center;gap:14px;color:var(--dim);font-size:14px}.or::before,.or::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.1)}
+.ca{text-align:center;color:#fff;font-weight:700;font-size:16px;text-decoration:none;padding:2px}
+.ca:hover{color:var(--g)}
+.ft{position:relative;z-index:2;margin-top:auto;padding:38px 20px 74px;text-align:center;opacity:0;transition:opacity .8s 1.2s}.on .ft{opacity:1}
+.ft .wm{display:flex;justify-content:center;font-size:24px;margin-bottom:8px}.ft>span:last-child{color:var(--mut);font-size:15px}
+.snd{position:fixed;inset-inline-end:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));z-index:5;height:38px;padding:0 18px;border-radius:19px;border:1px solid rgba(255,255,255,.12);background:rgba(32,34,35,.8);color:var(--mut);font-size:14px;cursor:pointer}
+.snd:hover{color:#fff}.snd:focus-visible{outline:2px solid var(--g);outline-offset:3px}
+@media(min-width:700px){.lamp{zoom:.68}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01s!important;transition-delay:0s!important}}
+</style>
+</head>
+<body>
+<div id="st">
+  <div class="glow"></div><div class="motes" id="mt"></div>
+  <div class="lamp" id="lamp">
+    <div class="fix"></div><div class="wire"></div><div class="sock"></div>
+    <div class="bulb"><i class="eye l"></i><i class="eye r"></i><i class="bl l"></i><i class="bl r"></i><i class="mouth"></i><span class="zz">Zz</span></div>
+    <div class="pull" id="pl"><button class="bead" id="bd" type="button" aria-label="اسحب الخيط لتشغيل الضوء"></button><div class="hint"><span>↓</span><span>اسحب</span></div></div>
+  </div>
+
+  <form class="card" id="f" method="post" novalidate>
+    <div class="hd" style="--i:0"><span class="wm"><b>Entil<i>a</i><i>a</i>q<i>a</i></b><em>.com</em></span></div>
+    <p class="sub" style="--i:0">الضوء مضاء من أجلك.</p>
+    <input style="--i:1" id="e" type="email" name="email" placeholder="البريد الإلكتروني" autocomplete="username" inputmode="email" aria-label="البريد الإلكتروني">
+    <div class="pw" style="--i:2"><input id="p" type="password" name="password" placeholder="كلمة المرور" autocomplete="current-password" aria-label="كلمة المرور"><button type="button" id="sh" aria-pressed="false">إظهار</button></div>
+    <div class="row" style="--i:3"><label><input type="checkbox" id="rm">تذكّرني</label><a href="#" id="fg">نسيت كلمة المرور؟</a></div>
+    <p id="err" role="alert" hidden></p>
+    <button class="go" id="go" type="submit" style="--i:4">تسجيل الدخول</button>
+    <div class="or" style="--i:5"><span>جديد معنا؟</span></div>
+    <a class="ca" href="/" style="--i:6">إنشاء حساب</a>
+  </form>
+
+  <div class="ft"><span class="wm"><b>Entil<i>a</i><i>a</i>q<i>a</i></b><em>.com</em></span><span>فكرتك تستحق أن تصبح شركة</span></div>
+  <button class="snd" id="sn" type="button">الصوت مفعّل</button>
+</div>
+<script>
+(()=>{
+const $=s=>document.getElementById(s),st=$("st"),pl=$("pl"),bd=$("bd"),lamp=$("lamp");
+const CFG={endpoint:"/api/login",redirect:"/dashboard.html"};
+const ERR={invalid_credentials:"البريد الإلكتروني أو كلمة المرور غير صحيحة.",invalid_input:"أدخل البريد الإلكتروني وكلمة المرور.",too_many_attempts:"محاولات كثيرة. انتظر قليلاً ثم حاول مرة أخرى.",auth_not_configured:"خدمة تسجيل الدخول غير جاهزة بعد. تواصل معنا.",auth_misconfigured:"خدمة تسجيل الدخول غير جاهزة بعد. تواصل معنا.",db:"خدمة تسجيل الدخول غير جاهزة بعد. تواصل معنا.",forbidden_origin:"تعذّر تسجيل الدخول من هذا العنوان."};
+let on=false,snd=true,ac=null;
+/* motes */
+const mt=$("mt");for(let i=0;i<18;i++){const m=document.createElement("i");m.className="m";const s=2+Math.random()*3;
+m.style.cssText=`left:${Math.random()*100}%;top:${12+Math.random()*60}%;width:${s}px;height:${s}px;--d:${4+Math.random()*6}s;--x:${(Math.random()-.5)*50}px;--y:${-10-Math.random()*40}px;animation-delay:${-Math.random()*6}s`;mt.append(m)}
+/* sound */
+const out=()=>ac.destination;
+function tone(f,t,d,v,type,f2){const o=ac.createOscillator(),g=ac.createGain();o.type=type||"sine";o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(out());o.start(t);o.stop(t+d+.02)}
+function noise(t,d,f,q,v){const n=Math.max(1,ac.sampleRate*d|0),b=ac.createBuffer(1,n,ac.sampleRate),c=b.getChannelData(0);for(let i=0;i<n;i++)c[i]=(Math.random()*2-1)*Math.pow(1-i/n,2);const s=ac.createBufferSource(),fl=ac.createBiquadFilter(),g=ac.createGain();s.buffer=b;fl.type="bandpass";fl.frequency.value=f;fl.Q.value=q;g.gain.value=v;s.connect(fl).connect(g).connect(out());s.start(t)}
+function hum(t,d,v){const g=ac.createGain(),lp=ac.createBiquadFilter();lp.type="lowpass";lp.frequency.value=520;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(v,t+.04);g.gain.exponentialRampToValueAtTime(.0001,t+d);lp.connect(g).connect(out());[100,200,300].forEach((f,i)=>{const o=ac.createOscillator(),k=ac.createGain();o.type="sawtooth";o.frequency.value=f;k.gain.value=1/(i+1);o.connect(k).connect(lp);o.start(t);o.stop(t+d+.05)})}
+/* صوت سحب سلسلة مفتاح اللمبة: نقرة ميكانيكية مزدوجة، ثم طنين الفتيل وطقة زجاج عند التشغيل أو انطفاء سريع عند الإطفاء */
+function sfx(){if(!snd)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();if(ac.state==="suspended")ac.resume();const t=ac.currentTime;
+noise(t,.025,3400,1.1,.9);tone(230,t,.08,.55,"sine",70);
+noise(t+.055,.02,2300,1.8,.7);tone(150,t+.055,.06,.35,"sine",60);
+if(on){noise(t+.1,.03,6500,3,.14);hum(t+.03,1.3,.022);tone(2650,t+.1,.3,.035);tone(4100,t+.11,.18,.015)}
+else{hum(t+.03,.2,.016);tone(2300,t+.3,.14,.025);noise(t+.42,.012,5200,4,.05)}}catch(e){}}
+$("sn").onclick=e=>{snd=!snd;e.currentTarget.textContent=snd?"الصوت مفعّل":"الصوت مكتوم"};
+/* cord */
+function toggle(){on=!on;st.classList.toggle("on",on);pl.classList.remove("sw");void pl.offsetWidth;pl.classList.add("sw");sfx();
+if(on&&matchMedia("(hover:hover)").matches)setTimeout(()=>$("e").focus({preventScroll:true}),1100)}
+/* سحب حرّ بالماوس/اللمس لأي اتجاه: الخيط يتبع المؤشر (دوران + تمدد)، والإفلات بعد سحبة كافية يبدّل الضوء */
+const L0=88;let drag=false,px=0,py=0,ox=0,oy=0,x0=0,y0=0,z=1,mv=0;
+const home=()=>{pl.style.transition="";pl.style.transform="";pl.style.setProperty("--dy","0px");st.classList.remove("dg")};
+bd.addEventListener("pointerdown",e=>{drag=true;mv=0;pl.classList.remove("sw");pl.style.transition="none";pl.style.transform="";pl.style.setProperty("--dy","0px");
+const r=pl.getBoundingClientRect(),h=parseFloat(getComputedStyle(pl).height)||L0;z=r.height/h;if(!(z>.3&&z<3))z=1;
+px=r.left+r.width/2;py=r.top;const b=bd.getBoundingClientRect();ox=e.clientX-(b.left+b.width/2);oy=e.clientY-(b.top+b.height/2);x0=e.clientX;y0=e.clientY;
+st.classList.add("dg");bd.setPointerCapture(e.pointerId)});
+bd.addEventListener("pointermove",e=>{if(!drag)return;
+const dx=e.clientX-ox-px,dy=e.clientY-oy-py,len=Math.max(50,Math.min(L0+90,Math.hypot(dx,dy)/z)),ang=Math.atan2(dx,Math.max(dy,1));
+pl.style.transform="rotate("+(-ang)+"rad)";pl.style.setProperty("--dy",(len-L0)+"px");mv=Math.hypot(e.clientX-x0,e.clientY-y0)/z});
+bd.addEventListener("pointerup",()=>{if(!drag)return;drag=false;const go=mv>26||mv<4;home();if(go)toggle()});
+bd.addEventListener("pointercancel",()=>{drag=false;home()});
+bd.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();toggle()}});
+/* إن كانت الجلسة صالحة مسبقاً ننتقل مباشرة إلى لوحة التحكم */
+if(location.protocol!=="file:")fetch("/api/me",{credentials:"same-origin"}).then(r=>{if(r.ok)location.replace(CFG.redirect)}).catch(()=>{});
+/* form */
+const em=$("e"),pw=$("p"),er=$("err"),go=$("go");
+try{const s=localStorage.getItem("lumen_email");if(s){em.value=s;$("rm").checked=true}}catch(e){}
+$("sh").onclick=e=>{const sh=pw.type==="password";pw.type=sh?"text":"password";e.currentTarget.textContent=sh?"إخفاء":"إظهار";e.currentTarget.setAttribute("aria-pressed",sh)};
+const msg=(t,ok)=>{er.textContent=t;er.className=ok?"ok":"";er.hidden=!t};
+$("fg").onclick=e=>{e.preventDefault();msg("اطلب من المسؤول إعادة تعيين كلمة المرور.",true)};
+$("f").addEventListener("input",()=>msg(""));
+$("f").addEventListener("submit",async e=>{e.preventDefault();
+const email=em.value.trim().toLowerCase(),password=pw.value;
+if(!email||!password){msg(ERR.invalid_input);(email?pw:em).focus();return}
+try{if($("rm").checked)localStorage.setItem("lumen_email",email);else localStorage.removeItem("lumen_email")}catch(x){}
+go.disabled=true;go.textContent="جارٍ تسجيل الدخول…";msg("");
+try{
+if(location.protocol==="file:"){msg("وضع المعاينة: تسجيل الدخول يعمل بعد نشر الصفحة على موقعك، ولا يعمل عند فتح الملف من الجهاز مباشرة.",true);return}
+const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),20000);
+try{const r=await fetch(CFG.endpoint,{method:"POST",headers:{"Content-Type":"application/json"},credentials:"same-origin",body:JSON.stringify({email,password}),signal:ctl.signal});
+let j={};try{j=await r.json()}catch(x){}
+if(r.ok)location.href=j.redirect||CFG.redirect;else msg(ERR[j.error]||"تعذّر تسجيل الدخول. تحقق من اتصالك بالإنترنت وحاول مرة أخرى.")}
+finally{clearTimeout(t)}
+}catch(x){msg("تعذّر تسجيل الدخول. تحقق من اتصالك بالإنترنت وحاول مرة أخرى.")}
+finally{go.disabled=false;go.textContent="تسجيل الدخول"}});
+})();
+</script>
+</body>
+</html>
