@@ -1,0 +1,45 @@
+/* =====================================================================
+   هوية الخط والأحجام — مشتركة بين كل الصفحات (الرئيسية، اللوحة، نموذج الجلسة)
+   خط ثمانية يُحمَّل من brand-fonts.css (مُضمَّن، بدون ملفات خطوط مستقلة).
+   ===================================================================== */
+:root{
+  --font-brand:"Thmanyah Sans","Thmanyah","IBM Plex Sans Arabic",Tahoma,"Segoe UI",system-ui,sans-serif;
+  /* سلّم الأحجام: متباين وثابت في كل الصفحات */
+  --fs-xs:13px;                                   /* حد أدنى لأي نص */
+  --fs-sm:14px;                                   /* ثانوي: ملاحظات، شارات، تذييل */
+  --fs-md:16px;                                   /* النص الأساسي */
+  --fs-lg:clamp(17px,.5vw + 15px,20px);           /* مقدمة/وصف تحت العنوان */
+  --fs-h3:clamp(19px,.6vw + 16px,24px);           /* عنوان بطاقة */
+  --fs-h2:clamp(26px,2vw + 14px,40px);            /* عنوان قسم */
+  --fs-h1:clamp(32px,4vw + 14px,64px);            /* عنوان رئيسي (الصفحة الرئيسية) */
+  --fs-app-title:clamp(28px,1.6vw + 18px,38px);     /* عنوان صفحة داخل اللوحة */
+  --fs-app-h2:20px;                               /* عنوان بطاقة داخل اللوحة */
+}
+
+html{font-family:var(--font-brand);font-size:16px}
+body,button,input,select,textarea{font-family:var(--font-brand)}
+body{font-size:var(--fs-md);font-weight:400;line-height:1.7}
+h1,h2,h3,h4{font-family:var(--font-brand);letter-spacing:0}
+small{font-size:var(--fs-sm)}
+
+/* ---------- الصفحة الرئيسية ---------- */
+body .hero h1{font-size:var(--fs-h1);font-weight:900;line-height:1.25}
+section h2{font-size:var(--fs-h2);font-weight:700;line-height:1.35}
+.c h3,.cd h3,.gu h3,.ok h3,.idb h3{font-size:var(--fs-h3);font-weight:700;line-height:1.4}
+.sub,.lead{font-size:var(--fs-lg);font-weight:400;line-height:1.8}
+nav .nl,nav .nl a{font-size:var(--fs-md);font-weight:500}
+nav .lang button,nav .btn.s,nav .tg{font-size:var(--fs-sm)}
+.btn{font-size:var(--fs-md);font-weight:700}
+body :is(.c p,.cd p,.mr,.o span,.q label,.ql,details p,summary,.rd,.tt,.idb p,.idb ol,.lgs,.ibar span){font-size:15px}
+body :is(.note,.k,.badge,.tag,.sc,.ch span,.bd,.er,.fn,.dev,.rh,.ferr,.lgs2,.lgb small,footer,.btn.s){font-size:var(--fs-sm)}
+#rp{font-size:var(--fs-sm)}
+input,select,textarea{font-size:16px} /* 16px يمنع تكبير iPhone تلقائيًا */
+
+/* ---------- لوحة التحكم + نموذج الجلسة ---------- */
+.pt h1,.lh h1,.w h1{font-size:var(--fs-app-title);font-weight:700;line-height:1.4}
+.cd h2{font-size:var(--fs-app-h2);font-weight:700;line-height:1.5}
+.kp .v{font-size:clamp(26px,1.2vw + 20px,32px);font-weight:700}
+th{font-size:var(--fs-sm);font-weight:500}
+td{font-size:15px}
+.nv{font-weight:500}
+.gt,.nv em{font-size:var(--fs-xs)}
